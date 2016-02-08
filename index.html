@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Vishwas Farm Demo</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- CSS (load bootstrap) -->
+        <style>
+            .bodyback{
+                background-image: url('images/body-pattern.png');
+            }
+        </style>
+        <link href="css/bootstrap.css" rel="stylesheet">
+        <link href="css/bootstrap-datetimepicker.css" rel="stylesheet">
+        <!--<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">-->      
+
+    </head>
+    <body ng-app="appVfarm" class="bodyback">
+        <!--<div ui-view></div>-->
+        
+        <div ui-view="nav"></div>
+
+        <div ui-view="content"></div>
+
+        <div ui-view="footer"></div>
+        
+        <!-- JS (load angular, ui-router, and our custom js file) -->
+        <script src="js/jquery.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
+        <script src="js/angular.min.js"></script>
+        <script src="js/ui-router.js"></script>
+        <script src="js/ui-bootstrap.js"></script>
+        <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.14.3.js"></script>
+        <!--<script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>-->
+        <script src="js/ui-select2.js"></script>
+        <script src="js/select2.min.js"></script>
+        <script src="js/dirPagination.js"></script>
+        <script src="js/moment.min.js"></script>
+        <script src="js/fullcalendar.min.js"></script>
+        <script src="js/fullcalendar.js"></script>
+        <script src="js/calendarDemo.js"></script>
+        <script src="js/calendar.js"></script>
+        <script src="js/lodash.min.js"></script>
+        
+        <script src="app.js"></script>
+        <script src="js/date.js"></script>  
+        <script src="app/controllers/vfarm.js"></script>
+        <script src="app/data/vfarmdata.js"></script>
+        <script src="app/controllers/productsCtrl.js"></script>
+        <script src="app/controllers/ordersCartModelCtrl.js"></script>
+        <script src="app/controllers/adminpanel.js"></script>
+        <script src="app/controllers/vfarmCtrl.js"></script>
+        <script src="app/controllers/navigationCtrl.js"></script>
+        <script src="app/controllers/walletCtrl.js"></script>
+        <!--<script src="app/data/vfarmdata.json"></script>-->
+    </body>
+</html>

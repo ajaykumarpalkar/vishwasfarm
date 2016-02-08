@@ -1,0 +1,46 @@
+  <style>
+    .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:active{
+        background-color: #73AD21 !important;
+        color: #ffffff !important;
+    }
+    
+    .li-active{
+        background-color: #73AD21 !important;
+        color: #ffffff !important;
+    }
+  </style>
+
+  <nav class="navbar navbar-default">
+      <div class="container-fluid" style="background-color: #F0FFF0;">
+          <div class="navbar-header">
+              <img src="images/vishwasFarm_small.png" width="60" height="50" alt="Vishwas Farm" style="float: left;">
+              <a class="navbar-brand" href="home" style="font-family: Helvetica Neue; font-size: large; color: brown;">
+                  Vishwas Farm
+              </a>
+          </div>
+          <div>
+              <ul class="nav navbar-nav">
+                  <li><a ng-click="goproducts()" class="li-active"><span class="glyphicon glyphicon-oil"></span> Dairy & Frozen</a></li>
+                  <li><a href="#"><span class="glyphicon glyphicon-leaf"></span> Organic Vegetables</a></li>
+                  <li><a href="#"><span class="glyphicon glyphicon-fire"></span> Organic Pulses</a></li>
+                  <li><a href="#"><span class="glyphicon glyphicon-grain"></span> Organic Grain</a></li>
+                  <li><a href="#"><span class="glyphicon glyphicon-asterisk"></span> Organic Flour</a></li>
+
+              </ul>
+              <ul class="nav navbar-nav navbar-right" ng-show="validlogin">
+                  <li><a ng-click="wallet()" style="cursor: pointer;" ><span style="font-size: 16px;" class="glyphicon glyphicon-piggy-bank" ></span> My Wallet</a></li>
+                  <li><a class="dropdown-toggle" data-toggle="dropdown" data-target="#">
+                          <span class="glyphicon glyphicon-user"></span> {{username}}<span class="caret"></span>
+                          <input type="hidden" value="{{userid}}" id="loginid">
+                      </a>
+                      <ul class="dropdown-menu">
+                          <li><a ui-href="#" ng-click="">Change Address</a></li>
+                          <li><a ui-href="#" ng-click="">My Profile</a></li>
+                          <li><a ui-href="#" ng-click="">Order History</a></li>
+                          <li><a ui-href="#" ng-click="logout()">Logout</a></li>
+                      </ul>
+                  </li>
+              </ul>
+          </div>
+      </div>
+  </nav>

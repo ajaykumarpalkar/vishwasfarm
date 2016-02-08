@@ -1,0 +1,96 @@
+<style>
+    .glyphicon-ok{
+        color: green;
+    }
+    .glyphicon-remove{
+        color: red;
+    }
+    
+    .loading {
+        position: absolute;
+            height: 100%;
+            width: 100%;
+            left: 0;
+            top: 0;
+            z-index: 999;
+    }
+</style>
+<!--Order Book Modal--> 
+<div class="loading" ng-if="dataloading">
+    <img src="/images/loading_spinner.gif" style="margin-top: 100px; margin-left: 100px;" alt="loading.."/>
+</div>
+
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <button type="button" class="close" ng-click="cancel()">&times;</button>
+        <h4 class="modal-title">{{ordersTitle}}</h4>
+        <div class="modelh5" ng-if="cartOrders.length > 0">
+            <span class="glyphicon glyphicon-shopping-cart"></span> 
+            Schedule your orders for morning or evening slot. Your cart contains  
+            <button type="button" style="margin-left: 5px;" class="btn btn-success btn-sm" ng-repeat="torder in cartOrders">
+                {{torder.product_name}} <code>{{torder.unit}}</code>
+                <span class="badge">{{torder.qty}}</span> 
+                <span class="glyphicon glyphicon-remove" data-tooltip='Remove' ng-click="removecart($index)"></span>
+            </button>
+        </div>
+        <div class="modelh5" ng-if="cartOrders.length === 0" style="color:red;">
+            Oho, Your cart <span class="glyphicon glyphicon-shopping-cart"></span>  is empty!!
+        </div>
+    </div>
+    <div class="panel-body" ng-if="cartOrders.length > 0">
+
+        <div class="list-group">
+            <div class="list-group-item" ng-repeat="order in myOrderBook">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <span class="orderdate">{{order.day | date:'EEEE, MMMM d, y'}}</span>
+                    </div>
+                    <div class="col-sm-9">
+                        <button type="button" class="btn btn-info morning" ng-click="morning(order.day)">
+                            <span class="glyphicon glyphicon-star-empty"></span> 
+                            Morning
+                            <span class="badge">{{order.morningOrders.length}}</span>
+                        </button>
+                        <button type="button" class="btn btn-info evening" ng-click="evening(order.day)">
+                            <span class="glyphicon glyphicon-star"></span> 
+                            Evening
+                            <span class="badge">{{order.eveningOrders.length}}</span>
+                        </button>
+                        <a data-target="#{{$index}}" style="float: right;" class="glyphicon glyphicon-chevron-down" data-toggle="collapse"></a>
+                    </div>
+                </div>
+
+                <div id="{{$index}}" class="collapse" style="margin-top:5px;">
+                    <div class="list-group the_group">
+                        <div class="list-group-item" ng-repeat="morder in order.morningOrders">
+                            <div class="row">
+                                <div class="col-sm-1"><span class="glyphicon glyphicon-star-empty"></span></div>
+                                <div class="col-sm-4">{{morder.product_name}} <code>{{morder.unit}}</code></div>
+                                <div class="col-sm-4">{{morder.quantity}} &#x2715; &#x20B9{{morder.unitprice}}</div>
+                                <div class="col-sm-1"></div>
+                                <div class="col-sm-1" ng-hide="morder.deliveryStatus === 'N'"><span class="glyphicon glyphicon-ok" data-tooltip='Done'></span></div>
+                                <div class="col-sm-1" ng-show="morder.deliveryStatus === 'N'"><span class="glyphicon glyphicon-remove" data-tooltip='Remove' ng-click="removeMOrder(morder,order.day)"></span></div>
+                            </div>
+                        </div>
+                        <div class="list-group-item" ng-repeat="morder in order.eveningOrders">
+                            <div class="row">
+                                <div class="col-sm-1"><span class="glyphicon glyphicon-star"></span></div>
+                                <div class="col-sm-4">{{morder.product_name}} <code>{{morder.unit}}</code></div>
+                                <div class="col-sm-4">{{morder.quantity}} &#x2715; &#x20B9{{morder.unitprice}}</div>
+                                <div class="col-sm-1"></div>
+                                <div class="col-sm-1" ng-hide="morder.deliveryStatus === 'N'"><span class="glyphicon glyphicon-ok" data-tooltip='Done'></span></div>
+                                <div class="col-sm-1" ng-show="morder.deliveryStatus === 'N'"><span class="glyphicon glyphicon-remove" data-tooltip='Remove' ng-click="removeEOrder(morder,order.day)"></span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel-footer">
+        <button type="button" class="btn btn-success confirm" ng-click="ok()" 
+                ng-if="cartOrders.length > 0 && customerid > 0">Confirm</button>
+        <button type="button" class="btn btn-default" ng-click="cancel()">Close</button>
+    </div>
+</div>
