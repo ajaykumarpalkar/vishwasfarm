@@ -1,0 +1,4 @@
+custid,email,firstname,lastname,contact,address,gender,usertype,cpassword,wallet
+1,ajaykumar@yahoo.co.in,ajay,palkar,8286582889,Sangavi,M,Normal,123,0
+2,yogesh@gmail.co.in,yog,sisodiya,8286585060,"Pimple Gurav",M,Premium,123,500
+5,amit@gmail.com,amit,hule,7755944490,"Dange Chowk",M,Normal,123,0

@@ -1,0 +1,5 @@
+orderid,orderday,product_name,userid,unit,quantity,unitprice,deliveryStatus,ordergroup
+1,"Fri Jan 29 2016 00:00:00 GMT+0530 (IST)","Buffalo Milk",1,"250 ML",1,12,N,Evening
+2,"Wed Jan 27 2016 00:00:00 GMT+0530 (IST)","Buffalo Milk",1,"500 ML",1,20,N,Morning
+4,"Tue Jan 26 2016 00:00:00 GMT+0530 (IST)","Buffalo Milk",0,"500 ML",1,20,N,Evening
+5,"Tue Jan 26 2016 00:00:00 GMT+0530 (IST)","Buffalo Milk",0,"500 ML",1,20,N,Evening

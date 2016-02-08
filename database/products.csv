@@ -1,0 +1,21 @@
+productid,productname,category,statusa,img,unit,unitprice
+1,"Cow Milk",Dairy,0,images/milk.jpg,250,20
+2,"Cow Milk",Dairy,0,images/milk.jpg,500,20
+3,"Cow Milk",Dairy,0,images/milk.jpg,1,38
+4,"Buffalo Milk",Dairy,0,images/bmilk.jpg,250,12
+5,"Buffalo Milk",Dairy,0,images/bmilk.jpg,500,20
+6,"Buffalo Milk",Dairy,0,images/bmilk.jpg,1,38
+7,Curd,Dairy,0,images/curd.jpg,250,12
+8,Curd,Dairy,0,images/curd.jpg,500,20
+9,Curd,Dairy,0,images/curd.jpg,1,38
+10,Paneer,Dairy,0,images/paneer.jpg,250,52
+11,Paneer,Dairy,0,images/paneer.jpg,500,80
+12,Peeyush,Dairy,0,images/peeyush.jpg,250,12
+13,Peeyush,Dairy,0,images/peeyush.jpg,500,20
+14,Peeyush,Dairy,0,images/peeyush.jpg,1,38
+15,Cheese,Dairy,0,images/cheese.jpg,250,48
+16,Cheese,Dairy,0,images/cheese.jpg,500,96
+17,Ghee,Dairy,0,images/ghee.jpg,500,155
+18,Ghee,Dairy,0,images/ghee.jpg,1,300
+19,Shrikhand,Dairy,0,images/shrikhand.jpg,250,52
+20,Shrikhand,Dairy,0,images/shrikhand.jpg,500,80
