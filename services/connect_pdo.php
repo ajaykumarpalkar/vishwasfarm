@@ -241,6 +241,7 @@ class DB {
                 $data_item['product_name'] = 'Payment';
                 $data_item['quantity'] = 0;
                 $data_item['unitprice'] = 0;
+                $data_item['unit'] = 0;
                 $data_item['amount'] = $row['amount'];
                 $data_item['firstname'] = $row['firstname'];
                 $data_item['lastname'] = $row['lastname'];
@@ -250,7 +251,7 @@ class DB {
             }
 
 
-            $sql2 = "SELECT o.orderday as tdate, o.product_name, o.quantity, o.unitprice,  c.firstname, c.lastname, c.contact, c.address FROM orders o, customer c WHERE o.userid = c.custid and o.userid = '".$custid."' and o.deliveryStatus = 'N'";
+            $sql2 = "SELECT o.orderday as tdate, o.product_name, o.quantity, o.unitprice, o.unit,  c.firstname, c.lastname, c.contact, c.address FROM orders o, customer c WHERE o.userid = c.custid and o.userid = '".$custid."' and o.deliveryStatus = 'N'";
 
             $q2 = $conn->query($sql2);
 
@@ -261,6 +262,7 @@ class DB {
                 $data_item['product_name'] = "Purchase (".$row2['product_name'].")";
                 $data_item['quantity'] = $row2['quantity'];
                 $data_item['unitprice'] = $row2['unitprice'];
+                $data_item['unit'] = $row2['unit'];
                 $data_item['amount'] = 0 - ($row2['quantity'] * $row2['unitprice']);
                 $data_item['firstname'] = $row2['firstname'];
                 $data_item['lastname'] = $row2['lastname'];

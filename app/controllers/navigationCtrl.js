@@ -26,7 +26,8 @@ app.controller('navigationCtrl', function ($scope, $state, $http, $rootScope) {
             localStorage.setItem("customername", "");
             localStorage.setItem("admin", "false");
         }
-        $state.go('login');
+//        $state.go('login');
+        window.location.assign("http://vishwasfarms.com/home.html");
     };
 
 });

@@ -86,10 +86,10 @@ $scope.dataloading = true;
     });
 
     function funTempOrder(pid, subpid, loginid) {
-        var pid = parseInt(pid.replace("d", ""))+1;
+ 	//var pid = parseInt(pid.replace("d", ""))+1;
         var subpid = parseInt(subpid);
         //alert(pid + " " + subpid);
-        var opro = $scope.products[pid - 1];
+        var opro = $($scope.products).filter(function(i,p){return p.productid==pid;})[0];//[pid - 1];
         var osubpro = opro.subproducts[subpid];
         var d = new Date();
         var orderid = d.getTime() + "" + loginid;
@@ -147,7 +147,6 @@ $scope.dataloading = true;
     };
    
 });
-
 
 
 
