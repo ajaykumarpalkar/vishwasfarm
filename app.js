@@ -65,6 +65,23 @@ app.config(function ($stateProvider, $urlRouterProvider) {
                     }
                 }
             })
+            
+            .state('myprofile', {
+                url: '/myprofile',
+                views: {
+                    nav: {
+                        templateUrl: 'app/views/navigation.html',
+                        controller: 'navigationCtrl'
+                    },
+                    content: {
+                        templateUrl: 'app/views/myprofile.html',
+                        controller: 'myprofileCtrl'
+                    },
+                    footer: {
+                        templateUrl: 'app/views/footer.html'
+                    }
+                }
+            })
 
 //            // nested list with custom controller
 //            .state('home.list', {

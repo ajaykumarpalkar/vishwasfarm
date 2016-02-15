@@ -1,19 +1,19 @@
 app.controller('adminpanel',
 function ($scope, $compile, $timeout, uiCalendarConfig, $modal, $log, $state, $http) {
-        $scope.totalquantity = 0;
-        $scope.totalunit = 0;
-        $scope.totalprice = 0;
-        $scope.allorders=[];
-        $scope.allordersbackup=[];
-        $scope.allProducts=[];
-        
-        $scope.allPayments=[];
-        
-            $scope.paymentslist = function () {
+    $scope.totalquantity = 0;
+    $scope.totalunit = 0;
+    $scope.totalprice = 0;
+    $scope.allorders=[];
+    $scope.allordersbackup=[];
+    $scope.allProducts=[];
+    $scope.allPayments=[];
+
+    /*Payments*/
+    $scope.paymentslist = function () {
         $scope.showproductslist = false;
         $scope.showorders = false;
         $scope.showpaymentlist = true;
-        
+
         $scope.showproductsclass = '';
         $scope.showordersclass = '';
         $scope.showpaymentsclass = 'li-active';
@@ -25,6 +25,7 @@ function ($scope, $compile, $timeout, uiCalendarConfig, $modal, $log, $state, $h
                 });
     };
     
+    /*Products*/
     $scope.productslist = function () {
         $scope.showproductslist = true;
         $scope.showorders = false;
@@ -82,20 +83,6 @@ function ($scope, $compile, $timeout, uiCalendarConfig, $modal, $log, $state, $h
         });
     };
 
-    $scope.changestate = function (oid, states) {
-        var index = _.findIndex($scope.allorders, function (o) {
-            return o.orderid === oid;
-        });
-        $scope.allorders[index].deliveryStatus = states;
-    };
-    
-    $scope.cancelorder = function (oid) {
-        var index = _.findIndex($scope.allorders, function (o) {
-            return o.orderid === oid;
-        });
-        $scope.allorders.splice(index, 1);
-    };
-    
     $scope.deleteproduct = function (productid) {
         $http.get("./services/deleteProduct.php",
             {params: {"productid": productid}})
@@ -108,6 +95,7 @@ function ($scope, $compile, $timeout, uiCalendarConfig, $modal, $log, $state, $h
             });
     };
     
+    /*Orders*/
     $scope.getTotal = function (filtered) {
         $scope.totalquantity = 0;
         $scope.totalunit = 0;
@@ -133,7 +121,7 @@ function ($scope, $compile, $timeout, uiCalendarConfig, $modal, $log, $state, $h
     $scope.generatebill = function () {
         alert("Relax, Email and Notification has been sent!");
     };
-    
+
     $scope.orderslist = function () {
         $scope.showproductslist = false;
         $scope.showorders = true;
@@ -166,7 +154,52 @@ function ($scope, $compile, $timeout, uiCalendarConfig, $modal, $log, $state, $h
     $scope.reset = function () {
         $scope.allorders = $scope.allordersbackup;
     };
-         
+    
+    $scope.cancelorder = function (oid) {
+        var order = {
+            "oid": oid
+        };
+
+        $http({
+            url: "./services/updateOrder.php",
+            method: "POST",
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            data: $.param({
+                updateorder: order
+            })
+        }).success(function (response) {
+            //console.log(response);
+            var index = _.findIndex($scope.allorders, function (o) {
+                return o.orderid === oid;
+            });
+            $scope.allorders.splice(index, 1);
+        });
+    };
+    
+    $scope.changestate = function (oid, states) {
+
+        var order = {
+            "oid": oid,
+            "states": states
+        };
+
+        $http({
+            url: "./services/updateOrder.php",
+            method: "POST",
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            data: $.param({
+                updateorder: order
+            })
+        }).success(function (response) {
+            //console.log(response);
+            var index = _.findIndex($scope.allorders, function (o) {
+                return o.orderid === oid;
+            });
+            $scope.allorders[index].deliveryStatus = states;
+        });
+    };
+    
+    /*Credentials*/   
     $scope.logout = function () {
         // Check browser support
         if (typeof (Storage) !== "undefined") {
@@ -174,10 +207,11 @@ function ($scope, $compile, $timeout, uiCalendarConfig, $modal, $log, $state, $h
             localStorage.setItem("customername", "");
             localStorage.setItem("admin", "false");
         }
-        $state.go('login');
+        //$state.go('login');
+        window.location.assign("../home.html");
     };
     
-    //datepicker
+    /*Datepicker*/
     $scope.today = function () {
         $scope.fromdt = new Date();
         $scope.todt = new Date();

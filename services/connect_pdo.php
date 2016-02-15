@@ -110,6 +110,25 @@ class DB {
         }
     }
     
+    function updateOrder($conn, $updateOrder) {
+        try {
+            if (!empty($updateOrder)) {
+                    $oid = $updateOrder['oid'];
+                    $states = $updateOrder['states'];
+                    
+                    if(!empty($states)){
+                        $sql = "UPDATE orders SET deliveryStatus='".$states."' WHERE orderid=".$oid;
+                    }else{
+                        $sql = "DELETE FROM orders WHERE orderid = ".$oid;
+                    }
+                    
+                    $conn->exec($sql);
+            }
+        } catch (PDOException $e) {
+            echo "Connection failed: " . $e->getMessage();
+        }
+    }
+    
     function newOrders($conn, $cancelorders, $neworders) {
         try {
             if (!empty($neworders)) {

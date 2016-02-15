@@ -41,8 +41,9 @@ app.controller('signinCtrl', function ($scope, $state, $http, $rootScope) {
     $scope.username = "";
     $scope.password = "";
     $scope.checkAuth = function () {
-        if ($scope.username === "" || $scope.password === "") {
-            alert("Please valid insert credentials..");
+        if ($scope.username === undefined || $scope.password === undefined 
+              || $scope.username === "" || $scope.password === "") {
+            alert("Please insert valid credentials..");
         } else
         {
             $http.get("./services/getCustomer.php",
@@ -69,8 +70,9 @@ app.controller('adminloginCtrl', function ($scope, $state, $http, $rootScope) {
     $scope.username = "";
     $scope.password = "";
     $scope.checkAuth = function () {
-        if ($scope.username === "" || $scope.password === "") {
-            alert("Please valid insert credentials..");
+        if ($scope.username === undefined || $scope.password === undefined
+                || $scope.username === "" || $scope.password === "") {
+            alert("Please insert valid credentials..");
         } else
         {
             $http.get("./services/getUser.php",
@@ -100,7 +102,7 @@ app.controller('signupCtrl', function ($scope, $state, $http, $rootScope) {
     
     $scope.checkAuth = function () {
 
-        if ($scope.signup_email === "" || $scope.signup_mobile === "" || $scope.signup_password === "") {
+        if ($scope.signup_email === undefined || $scope.signup_mobile === undefined || $scope.signup_password === undefined) {
             alert("Invalid data..");
         } else {
             var request = $http({

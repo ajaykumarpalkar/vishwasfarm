@@ -15,6 +15,10 @@ app.controller('navigationCtrl', function ($scope, $state, $http, $rootScope) {
         $state.go('wallet');
     };
     
+    $scope.myprofile = function () {
+        $state.go('myprofile');
+    };
+    
     $scope.goproducts = function () {
         $state.go('products');
     };
@@ -27,7 +31,7 @@ app.controller('navigationCtrl', function ($scope, $state, $http, $rootScope) {
             localStorage.setItem("admin", "false");
         }
 //        $state.go('login');
-        window.location.assign("http://vishwasfarms.com/home.html");
+        window.location.assign("../home.html");
     };
 
 });
