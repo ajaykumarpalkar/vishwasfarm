@@ -110,6 +110,19 @@ class DB {
         }
     }
     
+    function newPayment($conn, $paymentdate, $customerid, $amount) {
+        try {
+            if (!empty($customerid)) {
+                $sql = "INSERT INTO payments (payment_date, customerid, amount) VALUES "
+                . "('{$paymentdate}','{$customerid}','{$amount}')";
+
+                $conn->exec($sql);
+            }
+        } catch (PDOException $e) {
+            echo "Connection failed: " . $e->getMessage();
+        }
+    }
+    
     function updateOrder($conn, $updateOrder) {
         try {
             if (!empty($updateOrder)) {
@@ -185,6 +198,20 @@ class DB {
 //                $data_item['firstname'] = $row['firstname'];
 //                $data_item['wallet'] = $row['firstname'];
 //            }
+            return $row;
+        } catch (PDOException $e) {
+            echo "Connection failed: " . $e->getMessage();
+        }
+    }
+    
+    function getAllCustomer($conn) {
+        try {
+            $sql = "select * from customer";
+            $q = $conn->query($sql);
+
+            $q->setFetchMode(PDO::FETCH_ASSOC);
+            
+            $row = $q->fetchAll();
             return $row;
         } catch (PDOException $e) {
             echo "Connection failed: " . $e->getMessage();

@@ -8,7 +8,7 @@ app.controller('productsCtrl',
 
 //    $('#milkproducts').on('click', '.productunit', function () {
 //        if (Data.data.lengthcartOrders >= 2) {
-//            alert("Maximum 2 orders allowed at a time.");
+//            alertselectedTitle("Maximum 2 orders allowed at a time.");
 //        } else {
 //            $("[name='optradio']").removeClass("btn-success");
 //            $(".panel-footer").removeClass("panelfooterlight");

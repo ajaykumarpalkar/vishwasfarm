@@ -8,6 +8,29 @@ function ($scope, $compile, $timeout, uiCalendarConfig, $modal, $log, $state, $h
     $scope.allProducts=[];
     $scope.allPayments=[];
 
+    /* event payment model */
+    $scope.openPayment = function () {
+        var modalInstance = $modal.open({
+            templateUrl: 'app/views/paymentModel.html',
+            controller: 'paymentModelCtrl'
+//            ,resolve: {
+//                cartOrders: function () {
+//                    return $scope.cartOrders;
+//                },
+//                key: function () {
+//                    return 101;
+//                }
+//            }
+        });
+
+        modalInstance.result.then(function () {
+//            $scope.addEvent(selectedTitle);
+            console.log("value get...");
+        }, function () {
+            $log.info('Modal dismissed at: ' + new Date());
+        });
+    };
+    
     /*Payments*/
     $scope.paymentslist = function () {
         $scope.showproductslist = false;
@@ -41,21 +64,17 @@ function ($scope, $compile, $timeout, uiCalendarConfig, $modal, $log, $state, $h
                 });
     };
     
+    var nimages = "noimage.png";
     $scope.newproduct_name = "";
     $scope.newproduct_category = "";
-    $scope.newproduct_imgurl = "";
-    $scope.newproduct_status = 0;
+    //$scope.newproduct_imgurl = nimages;
+    $scope.newproduct_status = "1";
     $scope.newproduct_unit = 0;
-    $scope.newproduct_price = 0;
-    
-    $scope.isadd = false;
-    if($scope.newproduct_name!=="" && $scope.newproduct_category !=="" 
-            && $scope.newproduct_status > 0 && $scope.newproduct_price > 0){
-        $scope.isadd = true;
-    }
+    $scope.newproduct_price;
     
     $scope.addproduct = function () {
         $scope.dataloading = true;
+        $scope.newproduct_imgurl = "images/"+nimages;
         var product = {
             productid: '1New',
             productname: $scope.newproduct_name,
@@ -82,6 +101,28 @@ function ($scope, $compile, $timeout, uiCalendarConfig, $modal, $log, $state, $h
             $scope.status = status;
         });
     };
+    
+    $("#uploadimage").on('submit', (function (e) {
+        e.preventDefault();
+        $("#message").empty();
+        $("#message").html("Upload product image loading...");
+        $.ajax({
+            url: "./services/upload.php", // Url to which the request is send
+            type: "POST", // Type of request to be send, called as method
+            data: new FormData(this), // Data sent to server, a set of key/value pairs (i.e. form fields and values)
+            contentType: false, // The content type used when sending data to the server.
+            cache: false, // To unable request pages to be cached
+            processData: false, // To send DOMDocument or non processed data file it is set to false
+            success: function (data)   // A function to be called if request succeeds
+            {
+                if (data.includes("<h5>")) {
+                    nimages = "images/" + data.substring(data.indexOf("<h5>") + 4, data.indexOf("</h5>"));
+                    $("#previewimg").attr("src", nimages);
+                }
+                $("#message").html(data);
+            }
+        });
+    }));
 
     $scope.deleteproduct = function (productid) {
         $http.get("./services/deleteProduct.php",
