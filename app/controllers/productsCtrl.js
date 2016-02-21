@@ -1,5 +1,5 @@
 app.controller('productsCtrl',
-   function($scope, $compile, $timeout, uiCalendarConfig, Data, $modal, $log, $http) {
+   function($scope, $compile, $timeout, uiCalendarConfig, $modal, $log, $http) {
       $scope.cartOrders = [];
       $scope.products = products;
       var qty = 1;
@@ -36,14 +36,15 @@ $scope.dataloading = true;
         for (var i = 0; i < response.length; i++) {
             var productname = response[i].productname;
             var status = "In Stock";
-            if(parseInt(response[i].statusa) >= 1 ){
+            if (parseInt(response[i].statusa) === 0) {
                 status = "Out of stock";
             }
             var check = _.findIndex(products, function(o) { return o.productname === productname; });
             if (check >= 0){
                 var sub = {
                     unit: response[i].unit,
-                    price: response[i].unitprice
+                    price: response[i].unitprice,
+                    status: status
                 };
                 products[check].subproducts.push(sub);
             } else{
@@ -51,12 +52,12 @@ $scope.dataloading = true;
                     productid: 'd' + i,
                     productname: productname,
                     category: response[i].category,
-                    status: status,
                     img: response[i].img,
                     subproducts: [
                         {
                             unit: response[i].unit,
-                            price: response[i].unitprice
+                            price: response[i].unitprice,
+                            status: status
                         }
                     ]
                 };
@@ -91,21 +92,24 @@ $scope.dataloading = true;
         //alert(pid + " " + subpid);
         var opro = $($scope.products).filter(function(i,p){return p.productid==pid;})[0];//[pid - 1];
         var osubpro = opro.subproducts[subpid];
-        var d = new Date();
-        var orderid = d.getTime() + "" + loginid;
-        var tempOrder = {
-            day: new Date(),
-            userid: $("#loginid").val(),
-            orderid: orderid,
-            product_name: opro.productname,
-            unit: osubpro.unit,
-            quantity: qty,
-            unitprice: osubpro.price,
-            ordergroup: 'Morning',
-            deliveryStatus: 'N'
-        };
-        $scope.cartOrders.push(tempOrder);
-        Data.update($scope.cartOrders, $scope.cartOrders.length);
+        if(osubpro.status === 'In Stock'){
+            var d = new Date();
+            var orderid = d.getTime() + "" + loginid;
+            var tempOrder = {
+                day: new Date(),
+                userid: $("#loginid").val(),
+                orderid: orderid,
+                product_name: opro.productname,
+                unit: osubpro.unit,
+                quantity: qty,
+                unitprice: osubpro.price,
+                ordergroup: 'Morning',
+                deliveryStatus: 'N'
+            };
+            $scope.cartOrders.push(tempOrder);
+        }else{
+            alert("Out of stock");
+        }
     }
     
     $scope.cart = function (id, index) {
@@ -132,8 +136,8 @@ $scope.dataloading = true;
                 cartOrders: function () {
                     return $scope.cartOrders;
                 },
-                key: function () {
-                    return 101;
+                userkey: function () {
+                    return $("#loginid").val();
                 }
             }
         });

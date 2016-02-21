@@ -1,11 +1,12 @@
 app.controller('ordersCartModelCtrl',
-function ($scope, $modalInstance, cartOrders, key, $http) {
-    console.log("The key is " + key);
+function ($scope, $modalInstance, cartOrders, userkey, $http) {
+    console.log("The key is " + userkey);
     $scope.ordersTitle = "Order Book";
     $scope.cartOrders = cartOrders;
     $scope.addOrders = ['12456'];
     $scope.cancelOrders = ['12456'];
-//    $scope.myOrderBook = orderbook;
+    //$scope.myOrderBook = orderbook;
+    $scope.userkey = userkey;
 
     var date = new Date();
     var d = date.getDate();

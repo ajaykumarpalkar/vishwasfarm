@@ -18,6 +18,7 @@ class DB {
         }
     }
     
+    /*users*/
     function newUser($conn, $email, $contact, $pass) {
         try {
             $sql = "INSERT INTO customer (email, contact, cpassword) VALUES "
@@ -34,149 +35,6 @@ class DB {
             $sql = "INSERT INTO customer (firstname, lastname, email, contact, address, gender, usertype, cpassword) VALUES "
                     . "('{$firstname}','{$lastname}','{$email}','{$contact}','{$address}','{$gender}','{$usertype}','{$cpassword}')";
             $conn->exec($sql);
-        } catch (PDOException $e) {
-            echo "Connection failed: " . $e->getMessage();
-        }
-    }
-    
-    function deleteOrders($conn) {
-        try {
-            $sql = "TRUNCATE vishwasfarm.orders";
-            $conn->exec($sql);
-        } catch (PDOException $e) {
-            echo "Connection failed: " . $e->getMessage();
-        }
-    }
-    
-    function newOrders1($conn, $cancelorders, $neworders) {
-        try {
-            if (!empty($allorders)) {
-//                $stmt = $conn->prepare("INSERT INTO orders (orderday, product_name, userid, unit, quantity, unitprice, deliveryStatus, ordergroup) VALUES"
-//                        . " (:orderday, :product_name, :userid, :unit, :quantity, :unitprice, :deliveryStatus, :ordergroup)");
-//                $stmt->bindParam(':orderday', $orderday);
-//                $stmt->bindParam(':product_name', $product_name);
-//                $stmt->bindParam(':userid', $userid);
-//                $stmt->bindParam(':unit', $unit);
-//                $stmt->bindParam(':quantity', $quantity);
-//                $stmt->bindParam(':unitprice', $unitprice);
-//                $stmt->bindParam(':deliveryStatus', $deliveryStatus);
-//                $stmt->bindParam(':ordergroup', $ordergroup);
-
-                $arr_length = count($allorders);
-//                print_r(array_values($allorders));
-//                error_log(array_values($allorders));
-                for ($x = 0; $x < $arr_length; $x++) {
-                    $mydata = $allorders[$x];
-                $orderday = $mydata['day'];
-//                    error_log($mydata->morningOrders . "\n");
-                    
-                    foreach ($mydata['morningOrders'] as $values) {
-//                        error_log($values->orderid);
-                        $product_name = $values['product_name'];
-                        $userid = $values['userid'];
-                        $unit = $values['unit'];
-                        $quantity = $values['quantity'];
-                        $unitprice = $values['unitprice'];
-                        $deliveryStatus = $values['deliveryStatus'];
-                        $ordergroup = "Morning";
-                                    $sql = "INSERT INTO orders (orderday, product_name, userid, unit, quantity, unitprice, deliveryStatus, ordergroup) VALUES "
-                    . "('{$orderday}','{$product_name}','{$userid}','{$unit}','{$quantity}','{$unitprice}','{$deliveryStatus}','{$ordergroup}')";
-            
-                    $conn->exec($sql);
-                    }
-                    
-                                        foreach ($mydata['eveningOrders'] as $values) {
-//                        error_log($values->orderid);
-                        $product_name = $values['product_name'];
-                        $userid = $values['userid'];
-                        $unit = $values['unit'];
-                        $quantity = $values['quantity'];
-                        $unitprice = $values['unitprice'];
-                        $deliveryStatus = $values['deliveryStatus'];
-                        $ordergroup = "Morning";
-                                    $sql = "INSERT INTO orders (orderday, product_name, userid, unit, quantity, unitprice, deliveryStatus, ordergroup) VALUES "
-                    . "('{$orderday}','{$product_name}','{$userid}','{$unit}','{$quantity}','{$unitprice}','{$deliveryStatus}','{$ordergroup}')";
-            
-                    $conn->exec($sql);
-                    }
-
-                    // insert a row
-//                    $stmt->execute();
-                }
-            }
-//        $conn->exec($sql);
-        } catch (PDOException $e) {
-            echo "Connection failed: " . $e->getMessage();
-        }
-    }
-    
-    function newPayment($conn, $paymentdate, $customerid, $amount) {
-        try {
-            if (!empty($customerid)) {
-                $sql = "INSERT INTO payments (payment_date, customerid, amount) VALUES "
-                . "('{$paymentdate}','{$customerid}','{$amount}')";
-
-                $conn->exec($sql);
-            }
-        } catch (PDOException $e) {
-            echo "Connection failed: " . $e->getMessage();
-        }
-    }
-    
-    function updateOrder($conn, $updateOrder) {
-        try {
-            if (!empty($updateOrder)) {
-                    $oid = $updateOrder['oid'];
-                    $states = $updateOrder['states'];
-                    
-                    if(!empty($states)){
-                        $sql = "UPDATE orders SET deliveryStatus='".$states."' WHERE orderid=".$oid;
-                    }else{
-                        $sql = "DELETE FROM orders WHERE orderid = ".$oid;
-                    }
-                    
-                    $conn->exec($sql);
-            }
-        } catch (PDOException $e) {
-            echo "Connection failed: " . $e->getMessage();
-        }
-    }
-    
-    function newOrders($conn, $cancelorders, $neworders) {
-        try {
-            if (!empty($neworders)) {
-                $arr_length = count($neworders);
-
-                for ($a = 1; $a < $arr_length; $a++) {
-                    $mydata = $neworders[$a];
-                    $orderday = $mydata['day'];
-                    $orderid = $mydata['orderid'];
-                    $product_name = $mydata['product_name'];
-                    $userid = $mydata['userid'];
-                    $unit = $mydata['unit'];
-                    $quantity = $mydata['quantity'];
-                    $unitprice = $mydata['unitprice'];
-                    $deliveryStatus = $mydata['deliveryStatus'];
-                    $ordergroup = $mydata['ordergroup'];
-                    $sql = "INSERT INTO orders (orderday, product_name, userid, unit, quantity, unitprice, deliveryStatus, ordergroup) VALUES "
-                            . "('{$orderday}','{$product_name}','{$userid}','{$unit}','{$quantity}','{$unitprice}','{$deliveryStatus}','{$ordergroup}')";
-
-                    $conn->exec($sql);
-                }
-            }
-            
-            if (!empty($cancelorders)) {
-                $arr_length = count($cancelorders);
-
-                for ($x = 0; $x < $arr_length; $x++) {
-                    $mydata = $neworders[$x];
-                    //$orderday = $mydata['day'];
-
-                    $sql = "DELETE FROM orders WHERE orderid = ".$orderid;
-
-                    $conn->exec($sql);
-                }
-            }
         } catch (PDOException $e) {
             echo "Connection failed: " . $e->getMessage();
         }
@@ -256,23 +114,9 @@ class DB {
             echo "Connection failed: " . $e->getMessage();
         }
     }
-    
-    function getCustOrders($conn,$custid) {
-        try {
-            $sql = "select * from orders where userid='".$custid."'";
 
-            $q = $conn->query($sql);
-
-            $q->setFetchMode(PDO::FETCH_ASSOC);
-            
-            $row = $q->fetchAll();
-            return $row;
-        } catch (PDOException $e) {
-            echo "Connection failed: " . $e->getMessage();
-        }
-    }
-    
-    function getCustomerPayments($conn,$custid) {
+    /*transactions*/
+    function getCustomerTransactions($conn,$custid) {
         try {
             $data_item = [];
             $array = array();
@@ -297,7 +141,7 @@ class DB {
             }
 
 
-            $sql2 = "SELECT o.orderday as tdate, o.product_name, o.quantity, o.unitprice, o.unit,  c.firstname, c.lastname, c.contact, c.address FROM orders o, customer c WHERE o.userid = c.custid and o.userid = '".$custid."' and o.deliveryStatus = 'N'";
+            $sql2 = "SELECT o.orderday as tdate, o.product_name, o.quantity, o.unitprice, o.unit,  c.firstname, c.lastname, c.contact, c.address FROM orders o, customer c WHERE o.userid = c.custid and o.userid = '".$custid."' and o.deliveryStatus = 'Y'";
 
             $q2 = $conn->query($sql2);
 
@@ -323,7 +167,7 @@ class DB {
         }
     }
     
-    function getAllPayments($conn) {
+    function getAllTransactions($conn) {
         try {
             $data_item = [];
             $array = array();
@@ -372,6 +216,21 @@ class DB {
         }
     }
     
+    /*payments*/
+    function newPayment($conn, $paymentdate, $customerid, $amount) {
+        try {
+            if (!empty($customerid)) {
+                $sql = "INSERT INTO payments (payment_date, customerid, amount) VALUES "
+                . "('{$paymentdate}','{$customerid}','{$amount}')";
+
+                $conn->exec($sql);
+            }
+        } catch (PDOException $e) {
+            echo "Connection failed: " . $e->getMessage();
+        }
+    }
+    
+    /*products*/
     function newProduct($conn, $newproduct) {
         try {
             if (!empty($newproduct)) {
@@ -432,6 +291,7 @@ class DB {
         }
     }
     
+    /*orders*/
     function getAllOrders($conn) {
         try {
             $sql = "SELECT o.*, c.firstname, c.lastname, c.contact, c.address FROM orders o, customer c WHERE o.userid = c.custid";
@@ -463,6 +323,166 @@ class DB {
 //            return $data."</tbody></table>";
             
             return $row;
+        } catch (PDOException $e) {
+            echo "Connection failed: " . $e->getMessage();
+        }
+    }
+    
+    function getOrderHistory($conn, $custid) {
+        try {
+            $sql = "SELECT o.*, c.firstname, c.lastname, c.contact, c.address FROM orders o, customer c WHERE o.userid =  c.custid and c.custid= ".$custid;
+
+            $q = $conn->query($sql);
+
+            $q->setFetchMode(PDO::FETCH_ASSOC);
+            $row = $q->fetchAll();
+
+            return $row;
+        } catch (PDOException $e) {
+            echo "Connection failed: " . $e->getMessage();
+        }
+    }
+    
+    function getCustOrders($conn,$custid) {
+        try {
+            $sql = "select * from orders where userid='".$custid."'";
+
+            $q = $conn->query($sql);
+
+            $q->setFetchMode(PDO::FETCH_ASSOC);
+            
+            $row = $q->fetchAll();
+            return $row;
+        } catch (PDOException $e) {
+            echo "Connection failed: " . $e->getMessage();
+        }
+    }
+    
+    function updateOrder($conn, $updateOrder) {
+    try {
+        if (!empty($updateOrder)) {
+                $oid = $updateOrder['oid'];
+                $states = $updateOrder['states'];
+
+                if(!empty($states)){
+                    $sql = "UPDATE orders SET deliveryStatus='".$states."' WHERE orderid=".$oid;
+                }else{
+                    $sql = "DELETE FROM orders WHERE orderid = ".$oid;
+                }
+
+                $conn->exec($sql);
+        }
+    } catch (PDOException $e) {
+        echo "Connection failed: " . $e->getMessage();
+    }
+}
+    
+    function newOrders($conn, $cancelorders, $neworders) {
+        try {
+            if (!empty($neworders)) {
+                $arr_length = count($neworders);
+
+                for ($a = 1; $a < $arr_length; $a++) {
+                    $mydata = $neworders[$a];
+                    $orderday = $mydata['day'];
+                    $orderid = $mydata['orderid'];
+                    $product_name = $mydata['product_name'];
+                    $userid = $mydata['userid'];
+                    $unit = $mydata['unit'];
+                    $quantity = $mydata['quantity'];
+                    $unitprice = $mydata['unitprice'];
+                    $deliveryStatus = $mydata['deliveryStatus'];
+                    $ordergroup = $mydata['ordergroup'];
+                    $sql = "INSERT INTO orders (orderday, product_name, userid, unit, quantity, unitprice, deliveryStatus, ordergroup) VALUES "
+                            . "('{$orderday}','{$product_name}','{$userid}','{$unit}','{$quantity}','{$unitprice}','{$deliveryStatus}','{$ordergroup}')";
+
+                    $conn->exec($sql);
+                }
+            }
+            
+            if (!empty($cancelorders)) {
+                $arr_length = count($cancelorders);
+
+                for ($x = 0; $x < $arr_length; $x++) {
+                    $mydata = $neworders[$x];
+                    //$orderday = $mydata['day'];
+
+                    $sql = "DELETE FROM orders WHERE orderid = ".$orderid;
+
+                    $conn->exec($sql);
+                }
+            }
+        } catch (PDOException $e) {
+            echo "Connection failed: " . $e->getMessage();
+        }
+    }
+    
+    function deleteOrders($conn) {
+        try {
+            $sql = "TRUNCATE vishwasfarm.orders";
+            $conn->exec($sql);
+        } catch (PDOException $e) {
+            echo "Connection failed: " . $e->getMessage();
+        }
+    }
+    
+    function newOrders1($conn, $cancelorders, $neworders) {
+        try {
+            if (!empty($allorders)) {
+//                $stmt = $conn->prepare("INSERT INTO orders (orderday, product_name, userid, unit, quantity, unitprice, deliveryStatus, ordergroup) VALUES"
+//                        . " (:orderday, :product_name, :userid, :unit, :quantity, :unitprice, :deliveryStatus, :ordergroup)");
+//                $stmt->bindParam(':orderday', $orderday);
+//                $stmt->bindParam(':product_name', $product_name);
+//                $stmt->bindParam(':userid', $userid);
+//                $stmt->bindParam(':unit', $unit);
+//                $stmt->bindParam(':quantity', $quantity);
+//                $stmt->bindParam(':unitprice', $unitprice);
+//                $stmt->bindParam(':deliveryStatus', $deliveryStatus);
+//                $stmt->bindParam(':ordergroup', $ordergroup);
+
+                $arr_length = count($allorders);
+//                print_r(array_values($allorders));
+//                error_log(array_values($allorders));
+                for ($x = 0; $x < $arr_length; $x++) {
+                    $mydata = $allorders[$x];
+                $orderday = $mydata['day'];
+//                    error_log($mydata->morningOrders . "\n");
+                    
+                    foreach ($mydata['morningOrders'] as $values) {
+//                        error_log($values->orderid);
+                        $product_name = $values['product_name'];
+                        $userid = $values['userid'];
+                        $unit = $values['unit'];
+                        $quantity = $values['quantity'];
+                        $unitprice = $values['unitprice'];
+                        $deliveryStatus = $values['deliveryStatus'];
+                        $ordergroup = "Morning";
+                                    $sql = "INSERT INTO orders (orderday, product_name, userid, unit, quantity, unitprice, deliveryStatus, ordergroup) VALUES "
+                    . "('{$orderday}','{$product_name}','{$userid}','{$unit}','{$quantity}','{$unitprice}','{$deliveryStatus}','{$ordergroup}')";
+            
+                    $conn->exec($sql);
+                    }
+                    
+                                        foreach ($mydata['eveningOrders'] as $values) {
+//                        error_log($values->orderid);
+                        $product_name = $values['product_name'];
+                        $userid = $values['userid'];
+                        $unit = $values['unit'];
+                        $quantity = $values['quantity'];
+                        $unitprice = $values['unitprice'];
+                        $deliveryStatus = $values['deliveryStatus'];
+                        $ordergroup = "Morning";
+                                    $sql = "INSERT INTO orders (orderday, product_name, userid, unit, quantity, unitprice, deliveryStatus, ordergroup) VALUES "
+                    . "('{$orderday}','{$product_name}','{$userid}','{$unit}','{$quantity}','{$unitprice}','{$deliveryStatus}','{$ordergroup}')";
+            
+                    $conn->exec($sql);
+                    }
+
+                    // insert a row
+//                    $stmt->execute();
+                }
+            }
+//        $conn->exec($sql);
         } catch (PDOException $e) {
             echo "Connection failed: " . $e->getMessage();
         }

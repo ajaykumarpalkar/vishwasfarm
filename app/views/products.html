@@ -1,33 +1,33 @@
 <link href="../css/bootstrap.css" rel="stylesheet">
 <style>
-table {
-    border-collapse: collapse;
-    width: 100%;
-}
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
 
-th, td {
-    text-align: left;
-    padding: 8px;
-}
+    th, td {
+        text-align: left;
+        padding: 8px;
+    }
 
-tr:nth-child(even){background-color: #f2f2f2}
+    tr:nth-child(even){background-color: #f2f2f2}
 
-th {
-    background-color: #4CAF50;
-    color: white;
-}
+    th {
+        background-color: #4CAF50;
+        color: white;
+    }
 
     .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:active{
         background-color: #73AD21 !important;
         color: #ffffff !important;
     }
-    
+
     .li-active{
         background-color: #73AD21 !important;
         color: #ffffff !important;
     }
-  </style>
-  <div class="loading" ng-if="dataloading">
+</style>
+<div class="loading" ng-if="dataloading">
     <img src="/images/loading_spinner.gif" style="margin-top: 100px; margin-left: 100px;" alt="loading.."/>
 </div>
 <!--Product Listing--> 
@@ -47,7 +47,7 @@ th {
 </div>
 
 <div class="row">
-    <div class="col-sm-3" ng-repeat="product in products" ng-if="$index<4">
+    <div class="col-sm-3" ng-repeat="product in products">
         <div class="panel panel-primary">
             <div class="panel-heading"><h3>{{product.productname}}</h3></div>
             <div class="panel-body">
@@ -55,15 +55,23 @@ th {
                     <button type="button" name="optradio" 
                             ng-class="{'btn-success': (product.productid === activeProduct && $index === activeUnit)}"
                             ng-click="cart(product.productid, $index)"
-                            class="btn btn-default productunit" 
+                            class="btn btn-default" 
                             value="{{product.productid}}X{{$index}}" 
                             ng-repeat="subproduct in product.subproducts">
-                        {{subproduct.unit}}<br>&#8377;{{subproduct.price}}</button>
+                        <span ng-if="subproduct.status === 'In Stock'">
+                            {{subproduct.unit}}<br>&#8377;{{subproduct.price}}
+                        </span>
+                        <span style="color: red;" 
+                              ng-if="subproduct.status === 'Out of stock'"
+                              data-tooltip="Out of stock">
+                            {{subproduct.unit}}<br>&#8377;{{subproduct.price}}
+                        </span>
+                        </button>
                 </p>
                 <div><img src="{{product.img}}" width="100" height="100" alt="" style="margin: 10px 60px;"></div>
             </div>
             
-            <div class="panel-footer" ng-if="product.status === 'In Stock'">
+            <div class="panel-footer">
                 <button type="button" class="btn btn-default btn-sm decrease">
                     <span class="glyphicon glyphicon-shopping-cart"></span> -
                 </button>
@@ -73,44 +81,6 @@ th {
                 <button type="button" class="btn btn-default btn-sm increase">
                     <span class="glyphicon glyphicon-shopping-cart"></span> +
                 </button>
-            </div>
-            <div class="panel-footer" ng-if="product.status === 'Out of Stock'">
-                    <code >Out of Stock</code>
-            </div>
-
-        </div>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-sm-3" ng-repeat="product in products" ng-if="$index>=4">
-        <div class="panel panel-primary" ng-class="{'panel-warning' : product.status === 'Out of Stock'}">
-            <div class="panel-heading"><h3>{{product.productname}}</h3></div>
-            <div class="panel-body">
-                <p> 
-                    <button type="button" name="optradio" 
-                            class="btn btn-default" 
-                            ng-class="{'productunit' : product.status === 'In Stock'}"
-                            value="{{product.productid}}X{{$index}}" 
-                            ng-repeat="subproduct in product.subproducts" ng-click="myFunction()">
-                        {{subproduct.unit}}<br>&#8377;{{subproduct.price}}</button>
-                </p>
-                <div><img src="{{product.img}}" width="100" height="100" alt="" style="margin: 10px 60px;"></div>
-            </div>
-            
-            <div class="panel-footer" ng-if="product.status === 'In Stock'">
-                <button type="button" class="btn btn-default btn-sm">
-                    <span class="glyphicon glyphicon-shopping-cart"></span> -
-                </button>
-                <button type="button" class="btn btn-default btn-sm">
-                    Quantity <span class="badge">1</span> 
-                </button>
-                <button type="button" class="btn btn-default btn-sm">
-                    <span class="glyphicon glyphicon-shopping-cart"></span> +
-                </button>
-            </div>
-            <div class="panel-footer" ng-if="product.status === 'Out of Stock'">
-                    <code >Out of Stock</code>
             </div>
         </div>
     </div>

@@ -1,0 +1,137 @@
+<style>
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+    .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:active{
+        background-color: #73AD21 !important;
+        color: #ffffff !important;
+    }
+    
+    .li-active{
+        background-color: #73AD21 !important;
+        color: #ffffff !important;
+    }
+  </style>
+  
+  <div style="margin-left: 10px; margin-right: 10px;">
+    <!--<label>Search: <input ng-model="search.$"></label>-->
+    <div class="row">
+        <div class="col-md-4">
+            <p class="input-group">
+                <span class = "input-group-addon">From </span>
+                <input type="text" style="color: #00acef;" class="form-control" uib-datepicker-popup="{{format}}" ng-model="fromdt" is-open="popup1.opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+            </p>
+        </div>
+
+        <div class="col-md-4">
+            <p class="input-group">
+                <span class = "input-group-addon">To </span>
+              <input type="text" style="color: #00acef;" class="form-control" uib-datepicker-popup="{{format}}" ng-model="todt" is-open="popup2.opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+            </p>
+        </div>
+            
+        <div class="col-md-4">
+            <button type="button" class="btn btn-primary" ng-click="ordersbymonth()">Apply</button>
+            <button type="button" class="btn btn-info" ng-click="reset()">Reset Range</button>
+        </div>
+
+    </div>
+    
+    <div class="row">
+        <div class="col-lg-3">
+            <div class = "input-group">
+                <span class = "input-group-addon">Product Name</span>
+                <input type = "text" class = "form-control" ng-model="search.product_name"> 
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class = "input-group">
+                <span class = "input-group-addon">Order Slot</span>
+                <select class="form-control" ng-model="search.ordergroup">
+                    <option value="">All</option>
+                    <option>Morning</option>
+                    <option>Evening</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class = "input-group">
+                <span class = "input-group-addon">Status</span>
+                <select class="form-control" ng-model="search.deliveryStatus">
+                    <option value="">All</option>
+                    <option value="N">Undelivered</option>
+                    <option value="Y">Delivered</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-lg-2">
+            <div class = "input-group">
+                <span class = "input-group-addon">Unit</span>
+                <input type = "text" class = "form-control" ng-model="search.unit"> 
+            </div>
+        </div>
+    </div>
+    <div style="min-height: 420px; overflow-y: scroll; margin-top: 20px;">  
+      <table border=1 style='border-collapse: collapse;'>
+          <thead><tr>
+                  <th>Order Date</th>
+                  <th>Product Name</th>
+                  <th>Unit</th>
+                  <th>Quantity</th>
+                  <th>Unitprice</th>
+                  <th>Delivery</th>
+                  <th>Status</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr ng-repeat="orders in filteredorders = (allorders | filter:search:strict)">
+                  <td>{{orders.orderday | date:'EEEE, MMMM d, y'}}</td>
+                  <td>{{orders.product_name}}</td>
+                  <td>{{orders.unit}}</td>
+                  <td>{{orders.quantity}}</td>
+                  <td>&#8377; {{orders.unitprice}}</td>
+                  <td>{{orders.ordergroup}}</td>
+                  <td>
+                    <span ng-if="orders.deliveryStatus === 'N'" ng-click="changestate(orders.orderid,'Y')"
+                          style="color: #d58512;" class="glyphicon glyphicon-road" data-tooltip='undelivered'></span>
+                    <span ng-if="orders.deliveryStatus === 'Y'" ng-click="changestate(orders.orderid,'N')"
+                          style="color: green;"  class="glyphicon glyphicon-home" data-tooltip='delivered'></span>
+                    <span style="color: red; float: right;" ng-click="cancelorder(orders.orderid)">
+                        <span class="glyphicon glyphicon-trash" data-tooltip='Cancel Order'></span> 
+                    </span> 
+                  </td>
+       
+              </tr>
+              <tr style="background-color: #00acef; font-weight: bolder;">
+                  <td></td>
+                  <td></td>
+                  <td>{{totalunit}} ML</td>
+                  <td>{{totalquantity}}</td>
+                  <td>&#8377;{{getTotal(filteredorders)}}</td>
+                  <td></td>
+                  <td></td>
+              </tr>
+          </tbody>
+      </table>
+    </div>
+  </div>

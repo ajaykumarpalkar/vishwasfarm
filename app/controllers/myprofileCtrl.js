@@ -1,4 +1,4 @@
-app.controller('walletCtrl',
+app.controller('myprofileCtrl',
 function ($scope, $compile, $timeout, uiCalendarConfig, $modal, $log, $state, $http) {
 //    $scope.allPayments = [];
 //    $scope.userid = '1';
@@ -30,9 +30,4 @@ function ($scope, $compile, $timeout, uiCalendarConfig, $modal, $log, $state, $h
         }
         return $scope.totalBalance;
     };
-
-    $scope.generatebill = function () {
-        alert("Thanks!");
-    };
-
 });

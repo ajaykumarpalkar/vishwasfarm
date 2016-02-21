@@ -13,26 +13,17 @@ function ($scope, $compile, $timeout, uiCalendarConfig, $modal, $log, $state, $h
         var modalInstance = $modal.open({
             templateUrl: 'app/views/paymentModel.html',
             controller: 'paymentModelCtrl'
-//            ,resolve: {
-//                cartOrders: function () {
-//                    return $scope.cartOrders;
-//                },
-//                key: function () {
-//                    return 101;
-//                }
-//            }
         });
 
         modalInstance.result.then(function () {
-//            $scope.addEvent(selectedTitle);
-            console.log("value get...");
+            console.log("payment done.");
         }, function () {
-            $log.info('Modal dismissed at: ' + new Date());
+            $log.info('Payment Modal dismissed at: ' + new Date());
         });
     };
     
-    /*Payments*/
-    $scope.paymentslist = function () {
+    /*Payments and Orders*/
+    $scope.transactions = function () {
         $scope.showproductslist = false;
         $scope.showorders = false;
         $scope.showpaymentlist = true;
@@ -40,7 +31,7 @@ function ($scope, $compile, $timeout, uiCalendarConfig, $modal, $log, $state, $h
         $scope.showproductsclass = '';
         $scope.showordersclass = '';
         $scope.showpaymentsclass = 'li-active';
-        $http.get("./services/getPayments.php",
+        $http.get("./services/getTransactions.php",
                 {params: {"custid": '0'}})
                 .success(function (response) {
                     //console.log(response);
@@ -171,7 +162,7 @@ function ($scope, $compile, $timeout, uiCalendarConfig, $modal, $log, $state, $h
         $scope.showordersclass = 'li-active';
         $scope.showpaymentsclass = '';
         $http.get("./services/getOrdersAll.php",
-                {params: {"custid": 1}})
+                {params: {"custid": 0}})
                 .success(function (response) {
                     //console.log(response);
                     $scope.allorders = response;

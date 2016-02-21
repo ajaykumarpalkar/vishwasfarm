@@ -1,4 +1,4 @@
-app.controller('navigationCtrl', function ($scope, $state, $http, $rootScope) {
+app.controller('navigationCtrl', function ($scope, $state, $http, $modal, $rootScope) {
     $scope.username = "";
     $scope.userid = "";
     $scope.validlogin = false;
@@ -11,10 +11,28 @@ app.controller('navigationCtrl', function ($scope, $state, $http, $rootScope) {
     }
 
 
+    /* event payment model */
+    $scope.openCustPayment = function () {
+        var modalInstance = $modal.open({
+            templateUrl: 'app/views/paymentModel.html',
+            controller: 'paymentModelCtrl'
+        });
+
+        modalInstance.result.then(function () {
+            console.log("Customer payment done.");
+        }, function () {
+            $log.info('Payment Modal dismissed at: ' + new Date());
+        });
+    };
+
     $scope.wallet = function () {
         $state.go('wallet');
     };
     
+    $scope.orderhistory = function () {
+        $state.go('myorders');
+    };
+
     $scope.myprofile = function () {
         $state.go('myprofile');
     };

@@ -1,5 +1,5 @@
 app.controller('walletCtrl',
-function ($scope, $compile, $timeout, uiCalendarConfig, $modal, $log, $state, $http) {
+function ($scope, $compile, $timeout, $log, $state, $http) {
     $scope.allPayments = [];
     $scope.userid = '1';
     $scope.totalBalance;
@@ -7,10 +7,9 @@ function ($scope, $compile, $timeout, uiCalendarConfig, $modal, $log, $state, $h
         $scope.userid = localStorage.getItem("customerid");
         console.log($scope.userid );
     }
-
     
     $scope.paymentslist = function () {
-        $http.get("./services/getPayments.php",
+        $http.get("./services/getTransactions.php",
                 {params: {"custid": $scope.userid}})
                 .success(function (response) {
                     console.log(response);
@@ -26,10 +25,6 @@ function ($scope, $compile, $timeout, uiCalendarConfig, $modal, $log, $state, $h
             $scope.totalBalance += parseInt(payment.amount);
         }
         return $scope.totalBalance;
-    };
-
-    $scope.generatebill = function () {
-        alert("Thanks!");
     };
 
 });

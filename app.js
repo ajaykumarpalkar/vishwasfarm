@@ -49,16 +49,16 @@ app.config(function ($stateProvider, $urlRouterProvider) {
                 }
             })
             
-            .state('wallet', {
-                url: '/wallet',
+            .state('myorders', {
+                url: '/myorders',
                 views: {
                     nav: {
                         templateUrl: 'app/views/navigation.html',
                         controller: 'navigationCtrl'
                     },
                     content: {
-                        templateUrl: 'app/views/wallet.html',
-                        controller: 'walletCtrl'
+                        templateUrl: 'app/views/myorders.html',
+                        controller: 'myordersCtrl'
                     },
                     footer: {
                         templateUrl: 'app/views/footer.html'
@@ -76,6 +76,23 @@ app.config(function ($stateProvider, $urlRouterProvider) {
                     content: {
                         templateUrl: 'app/views/myprofile.html',
                         controller: 'myprofileCtrl'
+                    },
+                    footer: {
+                        templateUrl: 'app/views/footer.html'
+                    }
+                }
+            })
+            
+            .state('wallet', {
+                url: '/wallet',
+                views: {
+                    nav: {
+                        templateUrl: 'app/views/navigation.html',
+                        controller: 'navigationCtrl'
+                    },
+                    content: {
+                        templateUrl: 'app/views/wallet.html',
+                        controller: 'walletCtrl'
                     },
                     footer: {
                         templateUrl: 'app/views/footer.html'

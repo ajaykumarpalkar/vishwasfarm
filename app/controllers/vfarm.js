@@ -11,19 +11,19 @@ app.run(function($rootScope) {
     $rootScope.customerid = 0;
 });
 
-app.factory('Data', function () {
-    return {
-    data: {
-      thecartOrders: [],
-      lengthcartOrders: 0
-    },
-    update: function(temp, len) {
-      // Improve this method as needed
-      this.data.thecartOrders = temp;
-      this.data.lengthcartOrders = len;
-    }
-  };
-});
+//app.factory('Data', function () {
+//    return {
+//    data: {
+//      thecartOrders: [],
+//      lengthcartOrders: 0
+//    },
+//    update: function(temp, len) {
+//      // Improve this method as needed
+//      this.data.thecartOrders = temp;
+//      this.data.lengthcartOrders = len;
+//    }
+//  };
+//});
 
 function sessionIn(id, name, adminlogin){
     // Check browser support

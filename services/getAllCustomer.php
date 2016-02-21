@@ -7,7 +7,7 @@
 
 require_once './connect_pdo.php';
 $stats = new DB;
-$data_item = $stats->getCustomer($stats->conn);
+$data_item = $stats->getAllCustomer($stats->conn);
 header('Content-Type: application/json');
 echo json_encode($data_item);
 $stats->connclose();

@@ -6,9 +6,9 @@ $custid = $_GET['custid'];
 require_once './connect_pdo.php';
 $stats = new DB;
 if($custid !== NULL && $custid !== '0'){
-    $data_item = $stats->getCustomerPayments($stats->conn, $custid);
+    $data_item = $stats->getCustomerTransactions($stats->conn, $custid);
 }else{
-    $data_item = $stats->getAllPayments($stats->conn);
+    $data_item = $stats->getAllTransactions($stats->conn);
 }
 
 header('Content-Type: application/json');

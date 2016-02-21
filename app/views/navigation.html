@@ -28,15 +28,17 @@
 
               </ul>
               <ul class="nav navbar-nav navbar-right" ng-show="validlogin">
-                  <li><a ng-click="wallet()" style="cursor: pointer;" ><span style="font-size: 16px;" class="glyphicon glyphicon-piggy-bank" ></span> My Wallet</a></li>
+                  <li><a ng-click="openCustPayment()" style="cursor: pointer;" >
+                        <span class="glyphicon glyphicon-usd" ></span> Payment</a>
+                  </li>
                   <li><a class="dropdown-toggle" data-toggle="dropdown" data-target="#">
                           <span class="glyphicon glyphicon-user"></span> {{username}}<span class="caret"></span>
                           <input type="hidden" value="{{userid}}" id="loginid">
                       </a>
                       <ul class="dropdown-menu">
-                          <li><a ui-href="#" ng-click="">Change Address</a></li>
                           <li><a ui-href="#" ng-click="myprofile()">My Profile</a></li>
-                          <li><a ui-href="#" ng-click="">Order History</a></li>
+                          <li><a ui-href="#" ng-click="wallet()">My Transactions</a></li>
+                          <li><a ui-href="#" ng-click="orderhistory()">Order History</a></li>
                           <li><a ui-href="#" ng-click="logout()">Logout</a></li>
                       </ul>
                   </li>
