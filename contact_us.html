@@ -16,6 +16,7 @@ type="text/css" media="all">
 <LINK href="css/popupstyle.css" rel="stylesheet" type="text/css">
 
 <SCRIPT src="js/jquery-1.8.0.min.js" type="text/javascript"></SCRIPT>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 <!--[if lt IE 9]><script src="js/modernizr.custom.js"></script>
 <![endif]-->
 <SCRIPT src="js/jquery.carouFredSel-5.5.0-packed.js" type="text/javascript"></SCRIPT>
@@ -60,7 +61,7 @@ method="post">
     <LI><A href="services.html">Services</A></LI>
     <LI><A href="blogs.html">Blogs</A></LI>
     <LI class="active"><A href="contact_us.html">Contact Us</A></LI>
-    <LI><A href="index.html">Sign In</A></LI>
+    <LI><A href="index.html" id="loggedUser">Sign In</A></LI>
 </UL>
 
 
@@ -179,7 +180,15 @@ id="next" href="#"></A>
 
 <!-- end of wrapper -->
 </DIV>
-
+<script>
+    $(document).ready(function(){
+        var customername = "Sign In";
+        if (localStorage.getItem("customername") !== "" || localStorage.getItem("admin") === "true") {
+            customername = localStorage.getItem("customername");
+            $("#loggedUser").html("Signed as "+customername.toUpperCase());
+        }
+    });
+</script>
 </BODY>
 </HTML>
 

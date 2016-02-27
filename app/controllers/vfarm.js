@@ -40,6 +40,13 @@ function sessionIn(id, name, adminlogin){
 app.controller('signinCtrl', function ($scope, $state, $http, $rootScope) {
     $scope.username = "";
     $scope.password = "";
+    
+    if (localStorage.getItem("customerid") !== "" || localStorage.getItem("admin") === "true") {
+        $state.go('products');
+    } else {
+        $state.go('login');
+    }
+    
     $scope.checkAuth = function () {
         if ($scope.username === undefined || $scope.password === undefined 
               || $scope.username === "" || $scope.password === "") {

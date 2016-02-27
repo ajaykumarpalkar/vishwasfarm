@@ -149,9 +149,13 @@ function ($scope, $compile, $timeout, uiCalendarConfig, $modal, $log, $state, $h
         }
         return $scope.totalBalance;
     };
-    
+        
     $scope.generatebill = function () {
         alert("Relax, Email and Notification has been sent!");
+    };
+    
+    $scope.exportTransactions = function () {
+        alasql('SELECT * INTO XLSX("Transactions.xlsx",{headers:true}) FROM ?', [$scope.allPayments]);
     };
 
     $scope.orderslist = function () {
@@ -231,6 +235,11 @@ function ($scope, $compile, $timeout, uiCalendarConfig, $modal, $log, $state, $h
         });
     };
     
+    
+    $scope.exportOrders = function () {
+        alasql('SELECT * INTO XLSX("Orders.xlsx",{headers:true}) FROM ?', [$scope.allorders]);
+    };
+
     /*Credentials*/   
     $scope.logout = function () {
         // Check browser support
@@ -305,7 +314,8 @@ function ($scope, $compile, $timeout, uiCalendarConfig, $modal, $log, $state, $h
     opened: false
   };
 
-    
+  //default page loading
+  $scope.orderslist();
 });
 
 
