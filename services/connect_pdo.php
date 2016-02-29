@@ -19,10 +19,10 @@ class DB {
     }
     
     /*users*/
-    function newUser($conn, $email, $contact, $pass) {
+    function newUser($conn, $email, $contact, $pass, $firstname, $lastname, $address, $gender) {
         try {
-            $sql = "INSERT INTO customer (email, contact, cpassword) VALUES "
-                    . "('{$email}','{$contact}','{$pass}')";
+            $sql = "INSERT INTO customer (email, contact, firstname, lastname, address, gender, cpassword, usertype, wallet) VALUES "
+                    . "('{$email}','{$contact}','{$firstname}','{$lastname}','{$address}','{$gender}','{$pass}','Normal',0)";
             $conn->exec($sql);
             return $contact;
         } catch (PDOException $e) {

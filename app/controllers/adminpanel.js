@@ -65,7 +65,7 @@ function ($scope, $compile, $timeout, uiCalendarConfig, $modal, $log, $state, $h
     
     $scope.addproduct = function () {
         $scope.dataloading = true;
-        $scope.newproduct_imgurl = "images/"+nimages;
+        $scope.newproduct_imgurl = nimages;
         var product = {
             productid: '1New',
             productname: $scope.newproduct_name,
@@ -116,15 +116,17 @@ function ($scope, $compile, $timeout, uiCalendarConfig, $modal, $log, $state, $h
     }));
 
     $scope.deleteproduct = function (productid) {
-        $http.get("./services/deleteProduct.php",
-            {params: {"productid": productid}})
-            .success(function (response) {
-                //console.log(response);
-                var index = _.findIndex($scope.allProducts, function (o) {
-                    return o.productid === productid;
-                });
-                $scope.allProducts.splice(index, 1);
-            });
+        if (confirm("Are you sure?")) {
+            $http.get("./services/deleteProduct.php",
+                    {params: {"productid": productid}})
+                    .success(function (response) {
+                        //console.log(response);
+                        var index = _.findIndex($scope.allProducts, function (o) {
+                            return o.productid === productid;
+                        });
+                        $scope.allProducts.splice(index, 1);
+                    });
+        }
     };
     
     /*Orders*/

@@ -104,6 +104,11 @@ app.controller('signupCtrl', function ($scope, $state, $http, $rootScope) {
     $scope.signup_email = "";
     $scope.signup_mobile = "";
     $scope.signup_password = "";
+    $scope.firstname = "";
+    $scope.lastname = "";
+    $scope.address = "";
+    $scope.address1 = "";
+    $scope.gender = "M";
     $scope.message = "All fields are required.";
     $scope.signupsuccess = true;
     
@@ -118,7 +123,11 @@ app.controller('signupCtrl', function ($scope, $state, $http, $rootScope) {
                 data: {
                     email: $scope.signup_email,
                     mobile: $scope.signup_mobile,
-                    pass: $scope.signup_password
+                    pass: $scope.signup_password,
+                    firstname: $scope.firstname,
+                    lastname: $scope.lastname,
+                    address: $scope.address +", "+$scope.address1,
+                    gender: $scope.gender
                 },
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
             });
