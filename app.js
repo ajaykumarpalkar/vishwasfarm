@@ -33,7 +33,8 @@ app.config(function ($stateProvider, $urlRouterProvider) {
                     footer: {
                         templateUrl: 'app/views/footer.html'
                     }
-                }
+                },
+                params: {obj: "Dairy"}
             })
             
             .state('adminpanel', {

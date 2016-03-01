@@ -262,9 +262,9 @@ class DB {
         }
     }
     
-    function getProducts($conn) {
+    function getProducts($conn, $custid) {
         try {
-            $sql = "select * from products";
+            $sql = "SELECT * FROM products where category='".$custid."'";
 
             $q = $conn->query($sql);
 

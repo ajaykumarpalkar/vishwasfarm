@@ -1,5 +1,6 @@
 app.controller('productsCtrl',
-   function($scope, $compile, $timeout, uiCalendarConfig, $modal, $log, $http) {
+   function($scope, $compile, $timeout, uiCalendarConfig, $modal, $log, $http,$stateParams) {
+      console.log("Params............."+$stateParams.obj);
       $scope.cartOrders = [];
       $scope.products = products;
       var qty = 1;
@@ -23,7 +24,7 @@ app.controller('productsCtrl',
 //    });
 $scope.dataloading = true;
     $http.get("./services/getProducts.php",
-        {params: {"custid": 1}})
+        {params: {"custid": $stateParams.obj}})
         .success(function (response) {
             //console.log(response);
             dataFiller(response);

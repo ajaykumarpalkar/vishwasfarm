@@ -32,57 +32,62 @@
 </div>
 <!--Product Listing--> 
 <div id="milkproducts" class="container">
-        
-<div class="well well-sm" ng-if="cartOrders.length>0">
-    <span class="glyphicon glyphicon-shopping-cart"></span> 
-    Your cart contains <span class="badge">{{cartOrders.length}}</span> orders
-    <button type="button" style="margin-left: 5px;" class="btn btn-success btn-sm" ng-repeat="torder in cartOrders">
-        {{torder.product_name}} <code>{{torder.unit}}</code>
-        <span class="badge">{{torder.qty}}</span> 
-        <span class="glyphicon glyphicon-remove" data-tooltip='Remove' ng-click="removecart($index)"></span>
-    </button> 
-    <button type="button" class="btn btn-default btn-sm btn-primary" ng-click="open()">
-        <span class="glyphicon glyphicon-list-alt"></span> Place Order
-    </button>
-</div>
 
-<div class="row">
-    <div class="col-sm-3" ng-repeat="product in products">
-        <div class="panel panel-primary">
-            <div class="panel-heading"><h3>{{product.productname}}</h3></div>
-            <div class="panel-body">
-                <p> 
-                    <button type="button" name="optradio" 
-                            ng-class="{'btn-success': (product.productid === activeProduct && $index === activeUnit)}"
-                            ng-click="cart(product.productid, $index)"
-                            class="btn btn-default" 
-                            value="{{product.productid}}X{{$index}}" 
-                            ng-repeat="subproduct in product.subproducts">
-                        <span ng-if="subproduct.status === 'In Stock'">
-                            {{subproduct.unit}}<br>&#8377;{{subproduct.price}}
-                        </span>
-                        <span style="color: red;" 
-                              ng-if="subproduct.status === 'Out of stock'"
-                              data-tooltip="Out of stock">
-                            {{subproduct.unit}}<br>&#8377;{{subproduct.price}}
-                        </span>
-                        </button>
-                </p>
-                <div><img src="{{product.img}}" width="100" height="100" alt="" style="margin: 10px 60px;"></div>
+    <div class="well well-sm" ng-if="cartOrders.length > 0">
+        <span class="glyphicon glyphicon-shopping-cart"></span> 
+        Your cart contains <span class="badge">{{cartOrders.length}}</span> orders
+        <button type="button" style="margin-left: 5px;" class="btn btn-success btn-sm" ng-repeat="torder in cartOrders">
+            {{torder.product_name}} <code>{{torder.unit}}</code>
+            <span class="badge">{{torder.qty}}</span> 
+            <span class="glyphicon glyphicon-remove" data-tooltip='Remove' ng-click="removecart($index)"></span>
+        </button> 
+        <button type="button" class="btn btn-default btn-sm btn-primary" ng-click="open()">
+            <span class="glyphicon glyphicon-list-alt"></span> Place Order
+        </button>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12" ng-if="products.length <= 0">
+            <div class="alert alert-danger">
+                <strong>Oho!</strong> Currently no products in this category.
             </div>
-            
-            <div class="panel-footer">
-                <button type="button" class="btn btn-default btn-sm decrease">
-                    <span class="glyphicon glyphicon-shopping-cart"></span> -
-                </button>
-                <button type="button" class="btn btn-default btn-sm quantity" ng-class="{'btn-success': product.productid === activeProduct}">
-                    Quantity <span class="badge">1</span> 
-                </button>
-                <button type="button" class="btn btn-default btn-sm increase">
-                    <span class="glyphicon glyphicon-shopping-cart"></span> +
-                </button>
+        </div>
+        <div class="col-sm-3" ng-repeat="product in products">
+            <div class="panel panel-primary">
+                <div class="panel-heading"><h3>{{product.productname}}</h3></div>
+                <div class="panel-body">
+                    <p> 
+                        <button type="button" name="optradio" 
+                                ng-class="{'btn-success': (product.productid === activeProduct && $index === activeUnit)}"
+                                ng-click="cart(product.productid, $index)"
+                                class="btn btn-default" 
+                                value="{{product.productid}}X{{$index}}" 
+                                ng-repeat="subproduct in product.subproducts">
+                            <span ng-if="subproduct.status === 'In Stock'">
+                                {{subproduct.unit}}<br>&#8377;{{subproduct.price}}
+                            </span>
+                            <span style="color: red;" 
+                                  ng-if="subproduct.status === 'Out of stock'"
+                                  data-tooltip="Out of stock">
+                                {{subproduct.unit}}<br>&#8377;{{subproduct.price}}
+                            </span>
+                        </button>
+                    </p>
+                    <div><img src="{{product.img}}" width="100" height="100" alt="" style="margin: 10px 60px;"></div>
+                </div>
+
+                <div class="panel-footer">
+                    <button type="button" class="btn btn-default btn-sm decrease">
+                        <span class="glyphicon glyphicon-shopping-cart"></span> -
+                    </button>
+                    <button type="button" class="btn btn-default btn-sm quantity" ng-class="{'btn-success': product.productid === activeProduct}">
+                        Quantity <span class="badge">1</span> 
+                    </button>
+                    <button type="button" class="btn btn-default btn-sm increase">
+                        <span class="glyphicon glyphicon-shopping-cart"></span> +
+                    </button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 </div>

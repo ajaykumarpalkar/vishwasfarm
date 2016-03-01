@@ -36,9 +36,21 @@ app.controller('navigationCtrl', function ($scope, $state, $http, $modal, $rootS
     $scope.myprofile = function () {
         $state.go('myprofile');
     };
-    
+
     $scope.goproducts = function () {
-        $state.go('products');
+        $state.go('products', {obj:"Dairy"});
+    };
+        $scope.goproductsV = function () {
+        $state.go('products', {obj:"Vegetables"});
+    };
+        $scope.goproductsP = function () {
+        $state.go('products', {obj:"Pulses"});
+    };
+        $scope.goproductsG = function () {
+        $state.go('products', {obj:"Grain"});
+    };
+        $scope.goproductsF = function () {
+        $state.go('products', {obj:"Flour"});
     };
 
     $scope.logout = function () {

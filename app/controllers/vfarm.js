@@ -138,7 +138,8 @@ app.controller('signupCtrl', function ($scope, $state, $http, $rootScope) {
                 $scope.signupsuccess = false;
                 $scope.message = "Welcome to VishwasFarms... Your login has been created successfully with mobile number " + data;
                 setTimeout(function() {
-                    $state.go('/login');
+                    //$state.go('login');
+                    location.reload();
                 }, 200);
                 
             });
