@@ -19,18 +19,7 @@ class DB {
     }
     
     /*users*/
-    function newUser($conn, $email, $contact, $pass, $firstname, $lastname, $address, $gender) {
-        try {
-            $sql = "INSERT INTO customer (email, contact, firstname, lastname, address, gender, cpassword, usertype, wallet) VALUES "
-                    . "('{$email}','{$contact}','{$firstname}','{$lastname}','{$address}','{$gender}','{$pass}','Normal',0)";
-            $conn->exec($sql);
-            return $contact;
-        } catch (PDOException $e) {
-            echo "Connection failed: " . $e->getMessage();
-        }
-    }
-    
-    function newCustomer($conn, $firstname, $lastname, $email, $contact, $address, $gender, $usertype, $cpassword) {
+    function newUser($conn, $firstname, $lastname, $email, $contact, $address, $gender, $usertype, $cpassword) {
         try {
             $sql = "INSERT INTO customer (firstname, lastname, email, contact, address, gender, usertype, cpassword) VALUES "
                     . "('{$firstname}','{$lastname}','{$email}','{$contact}','{$address}','{$gender}','{$usertype}','{$cpassword}')";
@@ -39,43 +28,7 @@ class DB {
             echo "Connection failed: " . $e->getMessage();
         }
     }
-
-    function getCustomer($conn, $email, $pass) {
-        try {
-            $sql = "select * from customer where (email='".$email."' or contact='".$email."') and cpassword='".$pass."'";
-            $q = $conn->query($sql);
-
-            $q->setFetchMode(PDO::FETCH_ASSOC);
-            $data_item = [];
-            $row = $q->fetch();
-//            while ($row = $q->fetch()) {
-//                $data_item['custid'] = $row['custid'];
-//                $data_item['email'] = $row['email'];
-//                $data_item['contact'] = $row['contact'];
-//                $data_item['address'] = $row['address'];
-//                $data_item['firstname'] = $row['firstname'];
-//                $data_item['wallet'] = $row['firstname'];
-//            }
-            return $row;
-        } catch (PDOException $e) {
-            echo "Connection failed: " . $e->getMessage();
-        }
-    }
-    
-    function getAllCustomer($conn) {
-        try {
-            $sql = "select * from customer";
-            $q = $conn->query($sql);
-
-            $q->setFetchMode(PDO::FETCH_ASSOC);
-            
-            $row = $q->fetchAll();
-            return $row;
-        } catch (PDOException $e) {
-            echo "Connection failed: " . $e->getMessage();
-        }
-    }
-    
+ 
     function getUser($conn, $email, $pass) {
         try {
             $sql = "select * from users where (email='".$email."' or contact='".$email."') and password='".$pass."'";
@@ -92,6 +45,83 @@ class DB {
 //                $data_item['firstname'] = $row['firstname'];
 //                $data_item['wallet'] = $row['firstname'];
 //            }
+            return $row;
+        } catch (PDOException $e) {
+            echo "Connection failed: " . $e->getMessage();
+        }
+    }
+    
+    function newCustomer($conn, $email, $contact, $pass, $firstname, $lastname, $address, $gender) {
+        try {
+            $sql = "INSERT INTO customer (email, contact, firstname, lastname, address, gender, cpassword, usertype, wallet) VALUES "
+                    . "('{$email}','{$contact}','{$firstname}','{$lastname}','{$address}','{$gender}','{$pass}','Normal',0)";
+            $conn->exec($sql);
+            return $contact;
+        } catch (PDOException $e) {
+            echo "Connection failed: " . $e->getMessage();
+        }
+    }
+    
+    function updateCustomer($conn, $custid, $email, $contact, $pass, $firstname, $lastname, $address, $gender) {
+        try {
+            $sql = "UPDATE customer SET email='{$email}', contact='{$contact}', lastname='{$lastname}', firstname='{$firstname}', address='{$address}',cpassword='{$pass}' WHERE custid='".$custid."'";
+            $conn->exec($sql);
+            return $contact;
+        } catch (PDOException $e) {
+            echo "Connection failed: " . $e->getMessage();
+        }
+    }
+    
+    function checkCustomer($conn, $email, $contact) {
+        try {
+            $sql = "select * from customer where (email='" . $email . "' or contact='" . $contact . "')";
+            $q = $conn->query($sql);
+
+            $q->setFetchMode(PDO::FETCH_ASSOC);
+            if ($row = $q->fetch()) {
+                return FALSE;
+            } else {
+                return TRUE;
+            }
+        } catch (PDOException $e) {
+            echo "Connection failed: " . $e->getMessage();
+        }
+    }
+    
+    function getCustomer($conn, $email, $pass) {
+        try {
+            $sql = "select * from customer where (email='".$email."' or contact='".$email."') and cpassword='".$pass."'";
+            $q = $conn->query($sql);
+
+            $q->setFetchMode(PDO::FETCH_ASSOC);
+            $row = $q->fetch();
+            return $row;
+        } catch (PDOException $e) {
+            echo "Connection failed: " . $e->getMessage();
+        }
+    }
+    
+    function getCustomer1($conn, $email) {
+        try {
+            $sql = "select * from customer where (email='".$email."' or contact='".$email."')";
+            $q = $conn->query($sql);
+
+            $q->setFetchMode(PDO::FETCH_ASSOC);
+            $row = $q->fetch();
+            return $row;
+        } catch (PDOException $e) {
+            echo "Connection failed: " . $e->getMessage();
+        }
+    }
+    
+    function getAllCustomer($conn) {
+        try {
+            $sql = "select * from customer";
+            $q = $conn->query($sql);
+
+            $q->setFetchMode(PDO::FETCH_ASSOC);
+            
+            $row = $q->fetchAll();
             return $row;
         } catch (PDOException $e) {
             echo "Connection failed: " . $e->getMessage();

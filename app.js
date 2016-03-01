@@ -11,7 +11,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
                 url: '/login',
                 views: {
                     content: {
-                        templateUrl: 'app/views/log_in.html',
+                        templateUrl: 'app/views/vfarmlogin.html',
                         controller: 'signinCtrl'
                     },
                     footer: {

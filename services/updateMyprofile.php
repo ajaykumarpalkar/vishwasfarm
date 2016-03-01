@@ -5,6 +5,7 @@
  */
 $postdata = file_get_contents("php://input");
 $request = json_decode($postdata);
+$custid = $request->custid;
 $email = $request->email;
 $mobile = $request->mobile;
 $pass = $request->pass;
@@ -16,11 +17,7 @@ $gender = $request->gender;
 require_once './connect_pdo.php';
 $stats = new DB;
 
-if($stats->checkCustomer($stats->conn, $email, $mobile)){
-    $data_item = $stats->newCustomer($stats->conn, $email, $mobile, $pass, $firstname, $lastname, $address, $gender);
-}else{
-    $data_item = 0;
-}
+$data_item = $stats->updateCustomer($stats->conn, $custid, $email, $mobile, $pass, $firstname, $lastname, $address, $gender);
 
 echo json_encode($data_item);
 $stats->connclose();

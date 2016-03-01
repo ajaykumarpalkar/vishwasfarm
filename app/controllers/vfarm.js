@@ -11,25 +11,12 @@ app.run(function($rootScope) {
     $rootScope.customerid = 0;
 });
 
-//app.factory('Data', function () {
-//    return {
-//    data: {
-//      thecartOrders: [],
-//      lengthcartOrders: 0
-//    },
-//    update: function(temp, len) {
-//      // Improve this method as needed
-//      this.data.thecartOrders = temp;
-//      this.data.lengthcartOrders = len;
-//    }
-//  };
-//});
-
-function sessionIn(id, name, adminlogin){
+function sessionIn(id, name, email, adminlogin){
     // Check browser support
     if (typeof(Storage) !== "undefined") {
         localStorage.setItem("customerid", id);
         localStorage.setItem("customername", name);
+        localStorage.setItem("email", email);
         localStorage.setItem("admin", adminlogin);
     } else {
         alert("Sorry, your browser does not support Web Storage...");
@@ -62,7 +49,7 @@ app.controller('signinCtrl', function ($scope, $state, $http, $rootScope) {
                     $rootScope.customername = response.firstname;
                     $rootScope.customerid = response.custid;
                     $rootScope.login = true;
-                    sessionIn(response.custid, response.firstname, "false");
+                    sessionIn(response.custid, response.firstname, response.email, "false");
                     $state.go('products');
                 } else {
                     alert("Wrong Username or password!");
@@ -89,7 +76,7 @@ app.controller('adminloginCtrl', function ($scope, $state, $http, $rootScope) {
                 if (response) {
                     $scope.customers = response;
                     $rootScope.login = true;
-                    sessionIn("", "", "true");
+                    sessionIn("", "", "", "true");
                     $state.go('adminpanel');
                 } else {
                     alert("Wrong Username or password!");
@@ -110,11 +97,11 @@ app.controller('signupCtrl', function ($scope, $state, $http, $rootScope) {
     $scope.address1 = "";
     $scope.gender = "M";
     $scope.message = "All fields are required.";
-    $scope.signupsuccess = true;
     
     $scope.checkAuth = function () {
 
-        if ($scope.signup_email === undefined || $scope.signup_mobile === undefined || $scope.signup_password === undefined) {
+        if ($scope.signup_email === undefined || $scope.signup_mobile === undefined 
+                || $scope.signup_password === undefined) {
             alert("Invalid data..");
         } else {
             var request = $http({
@@ -134,14 +121,17 @@ app.controller('signupCtrl', function ($scope, $state, $http, $rootScope) {
 
             /* Check whether the HTTP Request is successful or not. */
             request.success(function (data) {
-                $rootScope.login = true;
-                $scope.signupsuccess = false;
-                $scope.message = "Welcome to VishwasFarms... Your login has been created successfully with mobile number " + data;
-                setTimeout(function() {
-                    //$state.go('login');
-                    location.reload();
-                }, 200);
-                
+                if(data === "0"){
+                    $scope.message = "Email or Mobile number already registered with us.";
+                }else{
+                    $rootScope.login = true;
+                    $scope.message = "Welcome to VishwasFarms... \n\
+                        Your login has been created successfully with mobile number " + data;
+                    setTimeout(function () {
+                        //$state.go('login');
+                        location.reload();
+                    }, 2000);
+                }
             });
         }
     };
