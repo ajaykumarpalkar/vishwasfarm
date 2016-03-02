@@ -64,12 +64,12 @@
                                 value="{{product.productid}}X{{$index}}" 
                                 ng-repeat="subproduct in product.subproducts">
                             <span ng-if="subproduct.status === 'In Stock'">
-                                {{subproduct.unit}}<br>&#8377;{{subproduct.price}}
+                                {{subproduct.unit}}g<br>&#8377;{{subproduct.price}}
                             </span>
                             <span style="color: red;" 
                                   ng-if="subproduct.status === 'Out of stock'"
                                   data-tooltip="Out of stock">
-                                {{subproduct.unit}}<br>&#8377;{{subproduct.price}}
+                                {{subproduct.unit}}g<br>&#8377;{{subproduct.price}}
                             </span>
                         </button>
                     </p>

@@ -29,7 +29,7 @@
             <span class="glyphicon glyphicon-shopping-cart"></span> 
             Schedule your orders for morning or evening slot. Your cart contains  
             <button type="button" style="margin-left: 5px;" class="btn btn-success btn-sm" ng-repeat="torder in cartOrders">
-                {{torder.product_name}} <code>{{torder.unit}}</code>
+                {{torder.product_name}} <code>{{torder.unit}}g</code>
                 <span class="badge">{{torder.qty}}</span> 
                 <span class="glyphicon glyphicon-remove" data-tooltip='Remove' ng-click="removecart($index)"></span>
             </button>
@@ -66,7 +66,7 @@
                         <div class="list-group-item" ng-repeat="morder in order.morningOrders">
                             <div class="row">
                                 <div class="col-sm-1"><span class="glyphicon glyphicon-star-empty"></span></div>
-                                <div class="col-sm-4">{{morder.product_name}} <code>{{morder.unit}}</code></div>
+                                <div class="col-sm-4">{{morder.product_name}} <code>{{morder.unit}}g</code></div>
                                 <div class="col-sm-4">{{morder.quantity}} &#x2715; &#x20B9{{morder.unitprice}}</div>
                                 <div class="col-sm-1"></div>
                                 <div class="col-sm-1" ng-hide="morder.deliveryStatus === 'N'"><span class="glyphicon glyphicon-ok" data-tooltip='Done'></span></div>
@@ -76,7 +76,7 @@
                         <div class="list-group-item" ng-repeat="morder in order.eveningOrders">
                             <div class="row">
                                 <div class="col-sm-1"><span class="glyphicon glyphicon-star"></span></div>
-                                <div class="col-sm-4">{{morder.product_name}} <code>{{morder.unit}}</code></div>
+                                <div class="col-sm-4">{{morder.product_name}} <code>{{morder.unit}}g</code></div>
                                 <div class="col-sm-4">{{morder.quantity}} &#x2715; &#x20B9{{morder.unitprice}}</div>
                                 <div class="col-sm-1"></div>
                                 <div class="col-sm-1" ng-hide="morder.deliveryStatus === 'N'"><span class="glyphicon glyphicon-ok" data-tooltip='Done'></span></div>

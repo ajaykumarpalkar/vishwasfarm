@@ -1,5 +1,5 @@
 app.controller('productsCtrl',
-   function($scope, $compile, $timeout, uiCalendarConfig, $modal, $log, $http,$stateParams) {
+   function($scope, $compile, $timeout, $modal, $log, $http, $stateParams) {
       console.log("Params............."+$stateParams.obj);
       $scope.cartOrders = [];
       $scope.products = products;
@@ -91,7 +91,7 @@ $scope.dataloading = true;
  	//var pid = parseInt(pid.replace("d", ""))+1;
         var subpid = parseInt(subpid);
         //alert(pid + " " + subpid);
-        var opro = $($scope.products).filter(function(i,p){return p.productid==pid;})[0];//[pid - 1];
+        var opro = $($scope.products).filter(function(i,p){return p.productid===pid;})[0];//[pid - 1];
         var osubpro = opro.subproducts[subpid];
         if(osubpro.status === 'In Stock'){
             var d = new Date();
@@ -144,7 +144,6 @@ $scope.dataloading = true;
         });
 
         modalInstance.result.then(function (selectedTitle) {
-            $scope.addEvent(selectedTitle);
             console.log("value get..." + selectedTitle);
         }, function () {
             $log.info('Modal dismissed at: ' + new Date());

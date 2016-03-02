@@ -1,4 +1,4 @@
-var app = angular.module('appVfarm', ['ui.router', 'ui.bootstrap', 'ui.select2', 'angularUtils.directives.dirPagination','ui.calendar']);
+var app = angular.module('appVfarm', ['ui.router', 'ui.bootstrap', 'ui.select2', 'angularUtils.directives.dirPagination']);
 app.config(function ($stateProvider, $urlRouterProvider) {
 
     $urlRouterProvider.otherwise('/login');

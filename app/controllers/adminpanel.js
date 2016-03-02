@@ -1,5 +1,5 @@
 app.controller('adminpanel',
-function ($scope, $compile, $timeout, uiCalendarConfig, $modal, $log, $state, $http) {
+function ($scope, $compile, $timeout, $modal, $log, $state, $http) {
     $scope.totalquantity = 0;
     $scope.totalunit = 0;
     $scope.totalprice = 0;
@@ -48,7 +48,7 @@ function ($scope, $compile, $timeout, uiCalendarConfig, $modal, $log, $state, $h
         $scope.showordersclass = '';
         $scope.showpaymentsclass = '';
         $http.get("./services/getProducts.php",
-                {params: {"custid": 1}})
+                {params: {"custid": ""}})
                 .success(function (response) {
                     //console.log(response);
                     $scope.allProducts = response;
@@ -62,7 +62,17 @@ function ($scope, $compile, $timeout, uiCalendarConfig, $modal, $log, $state, $h
     $scope.newproduct_status = "1";
     $scope.newproduct_unit = 0;
     $scope.newproduct_price;
+    $scope.isnewproduct_unit = true;
     
+    $scope.unitchange = function () {
+        var newproduct_unit_check = parseInt($scope.newproduct_unit);
+        if(newproduct_unit_check >= 100 && newproduct_unit_check%50===0){
+            $scope.isnewproduct_unit = false;
+        }else{
+            $scope.isnewproduct_unit = true;
+        }
+    };
+      
     $scope.addproduct = function () {
         $scope.dataloading = true;
         $scope.newproduct_imgurl = nimages;

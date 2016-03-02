@@ -292,9 +292,14 @@ class DB {
         }
     }
     
-    function getProducts($conn, $custid) {
+    function getProducts($conn, $category) {
         try {
-            $sql = "SELECT * FROM products where category='".$custid."'";
+            if(!empty($category)){
+                $sql = "SELECT * FROM products where category='".$category."'";
+            }else{
+                $sql = "SELECT * FROM products"; 
+            }
+            
 
             $q = $conn->query($sql);
 

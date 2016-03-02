@@ -2,7 +2,9 @@ app.controller('ordersCartModelCtrl',
 function ($scope, $modalInstance, cartOrders, userkey, $http) {
     console.log("The key is " + userkey);
     $scope.ordersTitle = "Order Book";
+        var cartOvvrders = cartOrders;
     $scope.cartOrders = cartOrders;
+
     $scope.addOrders = ['12456'];
     $scope.cancelOrders = ['12456'];
     //$scope.myOrderBook = orderbook;
@@ -70,6 +72,7 @@ function ($scope, $modalInstance, cartOrders, userkey, $http) {
                 $scope.myOrderBook.push(tempobject);
             }
         }
+       $scope.myOrderBook = _.sortBy($scope.myOrderBook, function(o) { return o.day; });
     }
     //date.toString('ddd, MMM d, yyyy');
 
@@ -102,10 +105,19 @@ function ($scope, $modalInstance, cartOrders, userkey, $http) {
         });
 
         for (var i = 0; i < $scope.cartOrders.length; i++) {
-            $scope.cartOrders[i].day = day;
-            $scope.cartOrders[i].ordergroup = 'Morning';
-            $scope.addOrders.push($scope.cartOrders[i]);
-            $scope.myOrderBook[editindex].morningOrders.push($scope.cartOrders[i]);
+            var tempOrder = {
+                day: day,
+                userid: $scope.cartOrders[i].userid,
+                orderid: $scope.cartOrders[i].orderid,
+                product_name: $scope.cartOrders[i].product_name,
+                unit: $scope.cartOrders[i].unit,
+                quantity: $scope.cartOrders[i].quantity,
+                unitprice: $scope.cartOrders[i].unitprice,
+                ordergroup: 'Morning',
+                deliveryStatus: $scope.cartOrders[i].deliveryStatus
+            };
+            $scope.addOrders.push(tempOrder);
+            $scope.myOrderBook[editindex].morningOrders.push(tempOrder);
         }
         
         $("#"+editindex).addClass("in");
@@ -117,10 +129,19 @@ function ($scope, $modalInstance, cartOrders, userkey, $http) {
             return o.day === day;
         });
         for (var i = 0; i < $scope.cartOrders.length; i++) {
-            $scope.cartOrders[i].day = day;
-            $scope.cartOrders[i].ordergroup = 'Evening';
-            $scope.addOrders.push($scope.cartOrders[i]);
-            $scope.myOrderBook[editindex].eveningOrders.push($scope.cartOrders[i]);
+            var tempOrder = {
+                day: day,
+                userid: $scope.cartOrders[i].userid,
+                orderid: $scope.cartOrders[i].orderid,
+                product_name: $scope.cartOrders[i].product_name,
+                unit: $scope.cartOrders[i].unit,
+                quantity: $scope.cartOrders[i].quantity,
+                unitprice: $scope.cartOrders[i].unitprice,
+                ordergroup: 'Evening',
+                deliveryStatus: $scope.cartOrders[i].deliveryStatus
+            };
+            $scope.addOrders.push(tempOrder);
+            $scope.myOrderBook[editindex].eveningOrders.push(tempOrder);
         }
         
         $("#"+editindex).addClass("in");
