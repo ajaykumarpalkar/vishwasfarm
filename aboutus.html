@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html PUBLIC "" ""><HTML lang="en"><HEAD> 
 <META charset="utf-8"> 
 <META name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=0"> 
-<TITLE>Vishwas Farm</TITLE> 
+<TITLE>Vishwas Farms</TITLE> 
 <META name="GENERATOR" content="WDL-Website-Builder"> <LINK href="css/images/favicon.ico" 
 rel="shortcut icon" type="image/x-icon"> <LINK href="css/style.css" rel="stylesheet" 
 type="text/css" media="all"> <LINK href="css/font.css" rel="stylesheet" type="text/css"> 
@@ -18,7 +18,7 @@ type="text/css" media="all"> <LINK href="css/font.css" rel="stylesheet" type="te
 <DIV id="wrapper"><!-- shell --> 
 <DIV class="shell"><!-- container --> 
 <DIV class="container"><!-- header --> <HEADER id="header">
-<H1 id="logo"><A href="home.html">Vishwas Farm</A></H1><!-- search --> 
+<H1 id="logo"><A href="home.html">Vishwas Farms</A></H1><!-- search --> 
 <DIV class="search">
 <FORM action="" 
 method="post"><INPUT title="keywords here ..." class="field" type="text" value="keywords here ...">
@@ -31,7 +31,7 @@ method="post"><INPUT title="keywords here ..." class="field" type="text" value="
   <LI class="active"><A href="aboutus.html">About Us</A></LI>
   <LI><A href="services.html">Services</A></LI>
   <LI><A href="blogs.html">Blogs</A></LI>
-  <LI><A href="client_log_in.html">Client Log In</A></LI>
+  <LI><A href="index.html" id="loggedUser">Sign In</A></LI>
   <LI><A href="contact_us.html">Contact Us</A></LI>
   <LI><A href="gallery.html">Photo Gallery</A></LI>
   <LI><A href="other_services.html">Other Services and links</A></LI></UL>
@@ -81,29 +81,29 @@ method="post"><INPUT title="keywords here ..." class="field" type="text" value="
   <LI><A href="aboutus.html">About Us</A></LI>
   <LI><A href="services.html">Services</A></LI>
   <LI><A href="blogs.html">Blogs</A></LI>
-  <LI><A href="client_log_in.html">Client Log In</A></LI>
+  <LI><A href="index.html" id="loggedUser">Sign In</A></LI>
   <LI><A href="contact_us.html">Contact Us</A></LI>
   <LI><A href="gallery.html">Photo Gallery</A></LI>
-  <LI><A href="other_services.html">Other Services and links</A></LI></UL>
-
-
+  <LI><A href="other_services.html">Other Services and links</A></LI>
+</UL>
 <DIV class="cl">&nbsp;</DIV>
+
 </DIV>
-<P class="copy">� Copyright 2015<SPAN>|</SPAN>Vishwas Farm.</P>
+<P class="copy">© Copyright 2015<SPAN>|</SPAN>Vishwas Farms.</P>
 <DIV class="cl">&nbsp;</DIV>
+                            </DIV><!-- end of footer --> 
+                    </DIV><!-- end of container --> 
+                </DIV><!-- end of shell --> 
+            </DIV><!-- end of wrapper --> 
 </DIV>
-
-<!-- end of footer -->
-</DIV>
-
-<!-- end of container -->
-</DIV>
-
-<!-- end of shell -->
-</DIV>
-
-<!-- end of wrapper -->
-</DIV>
-
+        <script>
+        $(document).ready(function(){
+            var customername = "Sign In";
+            if (localStorage.getItem("customername") !== "" || localStorage.getItem("admin") === "true") {
+                customername = localStorage.getItem("customername");
+                $("#loggedUser").html("Signed as "+customername.toUpperCase());
+            }
+        });
+        </script>
 </BODY>
 </HTML>
