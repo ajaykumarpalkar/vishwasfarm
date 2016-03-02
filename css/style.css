@@ -30,9 +30,9 @@ textarea { overflow: auto; }
 .container { background: url(images/container.png) repeat-y center 0; box-shadow: 0px 0px 0px 4px rgba(0,0,0,0.05); -moz-box-shadow: 0px 0px 0px 4px rgba(0,0,0,0.05); -webkit-box-shadow: 0px 0px 0px 4px rgba(0,0,0,0.05); -o-box-shadow: 0px 0px 0px 4px rgba(0,0,0,0.05);  }
 
 
-#header { margin-bottom: 10px;  position: relative; padding-top: 10px;  height: 130px; background: url(images/border-title.png) repeat-x 0 bottom; }
-#logo { width: 138px; font-size: 0; line-height: 0; position:absolute; top: 23px; left: 21px; }
-#logo a { height: 100px; display: block; background: url(images/logonew-small.png) no-repeat 0 0; text-indent: -4000px; }
+#header { margin-bottom: 10px;  position: relative; padding-top: 10px;  height: 180px; background: url(images/border-title.png) repeat-x 0 bottom; }
+#logo { width: 189px; font-size: 0; line-height: 0; position:absolute; top: 23px; left: 21px; }
+#logo a { height: 150px; display: block; background: url(images/Logo_Full.png) no-repeat 0 0; text-indent: -4000px; }
 .search { width: 261px; margin-left: auto; padding-right: 21px; }
 .search input.field { float:left; width: 166px; padding:0 8px; height: 24px; line-height: 24px;  border: 1px solid #d3d3d3; font-size: 11px; color:#bebebe; background: #ededed; border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px; -o-border-radius: 5px; }
 .search input.search-btn { float:left;  font-size: 0; line-height: 0; text-indent: -4000px; cursor: pointer; width: 20px; height: 26px; border: 0; background: url(images/search-ico.png) no-repeat 0 0; }
@@ -184,8 +184,9 @@ textarea { overflow: auto; }
 	body { width: auto; }
 
 	.search { display:none; }
-	#logo { position:relative; margin:0 auto; top: 0px; left:0;  }
-	
+	#logo { width: 126px; font-size: 0; line-height: 0; position:relative; margin:0 auto; top: 0px; left:0; }
+	#logo a { height: 100px; display: block; background: url(images/Logo_Mob.png) no-repeat 0 0; }
+
 	#header { background: transparent; margin-bottom:0; }
 
 	#navigation { position:relative; z-index: 100; padding:0 0px; margin:0 10px;  }
