@@ -16,7 +16,6 @@ type="text/css" media="all">
 <LINK href="css/popupstyle.css" rel="stylesheet" type="text/css">
 
 <SCRIPT src="js/jquery-1.8.0.min.js" type="text/javascript"></SCRIPT>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 <!--[if lt IE 9]><script src="js/modernizr.custom.js"></script>
 <![endif]-->
 <SCRIPT src="js/jquery.carouFredSel-5.5.0-packed.js" type="text/javascript"></SCRIPT>
@@ -58,80 +57,22 @@ method="post">
 <UL>
 <LI><A href="home.html">Home</A></LI>
 <LI><A href="aboutus.html">About Us</A></LI>
-<LI><A href="services.html">Services</A></LI>
-<LI><A href="blogs.html">Blogs</A></LI>
-<LI class="active"><A href="contact_us.html">Contact Us</A></LI>
-<LI><A href="index.html" id="loggedUser">Sign In</A></LI>
+<LI><A href="services.html">Services</A></LI><LI><A href="blogs.html">Blogs</A></LI>
+<LI><A href="client_log_in.html">Client Log In</A></LI>
+<LI><A href="contact_us.html">Contact Us</A></LI>
 <LI><A href="gallery.html">Photo Gallery</A></LI>
-<LI><A href="other_services.html">Other Services and links</A></LI></UL>
+<LI class="active"><A href="other_services.html">Other Services and links</A></LI></UL>
 <DIV class="cl">&nbsp;</DIV></NAV><!-- end of navigation --> <!-- slider-holder --> 
  
 <!-- main -->
 <DIV class="main"><DIV class="featured">
-<H4>Contact Us</H4>
+
+<H4>Other Associated Services and links</H4>
 </DIV>
 
 <SECTION class="cols">
-<DIV>
-
-<H3>Office Address</H3>
-<ul class="enlarge">
-<li>
-	<Table cellpadding="10" cellspacing="10" border="0">
-    <TR>
-    <TD><IMG src="css/images/office.png" height="40" width="40"></TD>
-    <TD>MontVert Tropez, G-202,<BR>
-	Survey 181, 182, Thergaon Link Road,<BR>
-	Datta Mandir Road, Wakad,<BR>
-	Pune, Maharashtra - 411027</TD>
-	</TR></Table>
-</li></ul><BR>
-
-<H3>Email Id</H3>
-<ul class="enlarge">
-<li>
-	<Table cellpadding="10" cellspacing="10" border="0">
-    <TR>
-    <TD><IMG src="css/images/email.png" height="40" width="40"></TD>
-    <TD><a href="mailto:svishwasrao@gmail.com">svishwasrao@gmail.com</a></TD>
-	</TR></Table>
-</li></ul><BR>
-
-<H3>Contact Number</H3>
-<ul class="enlarge">
-<li>
-	<Table cellpadding="10" cellspacing="10" border="0">
-    <TR>
-    <TD><IMG src="css/images/call.png" height="40" width="40"></TD>
-    <TD>+91 9545750033</TD>
-	</TR></Table>
-</li></ul><BR>
-
-<H3>Feedback</H3>
-<ul class="enlarge">
-<li">
-<form action="URL to form script" method="POST">
-Your name: <br>
-<input type="text" name="realname"><br>
-<br>
-
-Your email: <br>
-<input type="text" name="email"><br>
-<br>
-
-Your comments: <br>
-<textarea name="comments" rows="15" cols="50"></textarea><br><br>
-
-<input type="submit" value="Submit">
- 
-</form>
-</li></ul><BR>
-
-</DIV>
-
+<DIV class="cl"></DIV>
 </SECTION>
-
-</DIV>
 
 <!-- footer -->
 
@@ -140,6 +81,7 @@ Your comments: <br>
 <LI><A href="aboutus.html">About Us</A></LI>
 <LI><A href="services.html">Services</A></LI>
 <LI><A href="blogs.html">Blogs</A></LI>
+<LI><A href="client_log_in.html">Client Log In</A></LI>
 <LI><A href="contact_us.html">Contact Us</A></LI>
 <LI><A href="gallery.html">Photo Gallery</A></LI>
 <LI><A href="other_services.html">Other Services and links</A></LI></UL>
@@ -162,15 +104,7 @@ Your comments: <br>
 
 <!-- end of wrapper -->
 </DIV>
-<script>
-    $(document).ready(function(){
-        var customername = "Sign In";
-        if (localStorage.getItem("customername") !== "" || localStorage.getItem("admin") === "true") {
-            customername = localStorage.getItem("customername");
-            $("#loggedUser").html("Signed as "+customername.toUpperCase());
-        }
-    });
-</script>
+
 </BODY>
 </HTML>
 
