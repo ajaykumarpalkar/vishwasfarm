@@ -8,7 +8,6 @@ app.controller('paymentModelCtrl',
                 {params: {"custid": 1}})
                 .success(function (response) {
                     $scope.allCustomer = response;
-                    console.log(response);
                 });
 
         $scope.paynow = function () {

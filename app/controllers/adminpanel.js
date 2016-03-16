@@ -8,6 +8,24 @@ function ($scope, $compile, $timeout, $modal, $log, $state, $http) {
     $scope.allProducts=[];
     $scope.allPayments=[];
 
+    /* All Customers details */
+    $scope.getAllCustomers = function () {
+        $scope.showproductslist = false;
+        $scope.showorders = false;
+        $scope.showpaymentlist = false;
+        $scope.showcustomerslist = true;
+
+        $scope.showcustomersclass  = 'li-active';
+        $scope.showproductsclass = '';
+        $scope.showordersclass = '';
+        $scope.showpaymentsclass = '';
+        $http.get("./services/getAllCustomer.php",
+                {params: {"custid": 1}})
+                .success(function (response) {
+                    $scope.allCustomer = response;
+                });
+    };     
+    
     /* event payment model */
     $scope.openPayment = function () {
         var modalInstance = $modal.open({
@@ -27,7 +45,9 @@ function ($scope, $compile, $timeout, $modal, $log, $state, $http) {
         $scope.showproductslist = false;
         $scope.showorders = false;
         $scope.showpaymentlist = true;
+        $scope.showcustomerslist = false;
 
+        $scope.showcustomersclass  = '';
         $scope.showproductsclass = '';
         $scope.showordersclass = '';
         $scope.showpaymentsclass = 'li-active';
@@ -43,7 +63,10 @@ function ($scope, $compile, $timeout, $modal, $log, $state, $http) {
     $scope.productslist = function () {
         $scope.showproductslist = true;
         $scope.showorders = false;
-        $scope.showpaymentlist = false;
+        $scope.showpaymentlist = false;        
+        $scope.showcustomerslist = false;
+
+        $scope.showcustomersclass  = '';
         $scope.showproductsclass = 'li-active';
         $scope.showordersclass = '';
         $scope.showpaymentsclass = '';
@@ -174,6 +197,9 @@ function ($scope, $compile, $timeout, $modal, $log, $state, $http) {
         $scope.showproductslist = false;
         $scope.showorders = true;
         $scope.showpaymentlist = false;
+        $scope.showcustomerslist = false;
+
+        $scope.showcustomersclass  = '';
         $scope.showproductsclass = '';
         $scope.showordersclass = 'li-active';
         $scope.showpaymentsclass = '';

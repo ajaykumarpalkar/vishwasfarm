@@ -28,7 +28,7 @@ app.controller('signinCtrl', function ($scope, $state, $http, $rootScope) {
     $scope.username = "";
     $scope.password = "";
     
-    if (localStorage.getItem("customerid") !== "" || localStorage.getItem("admin") === "true") {
+    if (localStorage.length > 0 && (localStorage.getItem("customerid") !== "" || localStorage.getItem("admin") === "true")) {
         $state.go('products');
     } else {
         $state.go('login');
