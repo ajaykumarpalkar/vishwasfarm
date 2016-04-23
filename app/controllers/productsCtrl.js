@@ -43,6 +43,7 @@ $scope.dataloading = true;
             var check = _.findIndex(products, function(o) { return o.productname === productname; });
             if (check >= 0){
                 var sub = {
+                    unitdisplay: response[i].unitdisplay,
                     unit: response[i].unit,
                     price: response[i].unitprice,
                     status: status
@@ -56,6 +57,7 @@ $scope.dataloading = true;
                     img: response[i].img,
                     subproducts: [
                         {
+                            unitdisplay: response[i].unitdisplay,
                             unit: response[i].unit,
                             price: response[i].unitprice,
                             status: status
@@ -101,6 +103,7 @@ $scope.dataloading = true;
                 userid: $("#loginid").val(),
                 orderid: orderid,
                 product_name: opro.productname,
+                unitdisplay: osubpro.unitdisplay,
                 unit: osubpro.unit,
                 quantity: qty,
                 unitprice: osubpro.price,

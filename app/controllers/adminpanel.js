@@ -86,6 +86,7 @@ function ($scope, $compile, $timeout, $modal, $log, $state, $http) {
     $scope.newproduct_unit = 0;
     $scope.newproduct_price;
     $scope.isnewproduct_unit = true;
+    $scope.isnewproduct_unitdisplay = true;
     
     $scope.unitchange = function () {
         var newproduct_unit_check = parseInt($scope.newproduct_unit);
@@ -93,6 +94,14 @@ function ($scope, $compile, $timeout, $modal, $log, $state, $http) {
             $scope.isnewproduct_unit = false;
         }else{
             $scope.isnewproduct_unit = true;
+        }
+    };
+    
+    $scope.unitchangedisplay = function () {
+        if($scope.newproduct_unitdisplay === undefined || $scope.newproduct_unitdisplay===""){
+            $scope.isnewproduct_unitdisplay = true;
+        }else{
+            $scope.isnewproduct_unitdisplay = false;
         }
     };
       
@@ -106,7 +115,8 @@ function ($scope, $compile, $timeout, $modal, $log, $state, $http) {
             statusa: $scope.newproduct_status,
             img: $scope.newproduct_imgurl,
             unit: $scope.newproduct_unit,
-            unitprice: $scope.newproduct_price
+            unitprice: $scope.newproduct_price,
+            unitdisplay: $scope.newproduct_unitdisplay
         };
 
         $http({

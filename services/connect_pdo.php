@@ -270,9 +270,10 @@ class DB {
                 $i = $newproduct['img'];
                 $u = $newproduct['unit'];
                 $p = $newproduct['unitprice'];
+                $d = $newproduct['unitdisplay'];
 
-                $sql = "INSERT INTO products (productname, category, statusa, img, unit, unitprice) VALUES "
-                        . "('{$n}','{$c}','{$s}','{$i}','{$u}','{$p}')";
+                $sql = "INSERT INTO products (productname, category, statusa, img, unit, unitprice, unitdisplay) VALUES "
+                        . "('{$n}','{$c}','{$s}','{$i}','{$u}','{$p}','{$d}')";
 
                 $conn->exec($sql);
             }
